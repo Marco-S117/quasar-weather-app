@@ -1,12 +1,43 @@
 <template>
-  <q-page padding>
-    <h1>HomePage</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, quis ex. Dolores, impedit iste maxime quasi earum, eius nam amet, ipsum mollitia nisi commodi voluptas saepe dignissimos ab! Corrupti, quaerat.</p>
+  <q-page padding class="row justify-center items-center content-center">
+    <div>
+      <p>
+        This location is passed by global event.<br>
+        Try to search something using header searchbar.
+      </p>
+      <span>Search Location:</span>
+      <q-badge
+        color="primary"
+        text-color="white"
+        :label="place"
+        class="q-pa-sm q-ml-md"
+      />
+    </div>
   </q-page>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage'
+  name: 'IndexPage',
+  beforeMount () {
+    this.$root.$on('onPlaceSearch', this.onSearchLocation)
+  },
+  beforeDestroy () {
+    this.$root.$off('onPlaceSearch')
+  },
+  data: () => ({
+    place: 'Default place'
+  }),
+  computed: {
+    currentLocation () {
+      return this.place
+    }
+  },
+  methods: {
+    onSearchLocation (place) {
+      console.log('Place event in home page', place)
+      this.place = place
+    }
+  }
 }
 </script>
