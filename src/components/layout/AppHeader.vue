@@ -21,6 +21,36 @@
           </q-btn>
         </q-toolbar-title>
       </q-toolbar>
+
+      <div class="q-pt-lg q-pb-md">
+        <q-input
+          v-model="location"
+          :loading="!!location"
+          placeholder="Find your location"
+          label-color="#fff"
+          debounce="500"
+          filled
+          dense
+          class="q-px-md"
+        >
+          <template v-slot:prepend>
+            <q-icon name="place" />
+          </template>
+          <template v-slot:append v-if="!!location">
+            <q-icon
+              name="cancel"
+              @click.stop="location=null"
+              class="cursor-pointer"
+            />
+          </template>
+        </q-input>
+      </div>
+
+      <q-img
+        :src="HeaderBg"
+        class="header-image absolute-top"
+        position="bottom"
+      />
     </q-header>
 
     <AppDrawer
@@ -32,6 +62,7 @@
 
 <script>
 import AppDrawer from 'components/layout/AppDrawer'
+import HeaderBg from 'assets/images/header-bg.jpg'
 
 export default {
   name: 'AppHeader',
@@ -39,16 +70,31 @@ export default {
     AppDrawer
   },
   data: () => ({
-    showDrawer: false
+    HeaderBg,
+    showDrawer: false,
+    location: ''
   }),
   methods: {
     updateDrawerState (state) {
       this.showDrawer = state
     }
+  },
+  watch: {
+    location: function (place) {
+      if (place) {
+        console.log('Search for', place)
+        this.$root.$emit('onPlaceSearch', place)
+      }
+    }
   }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.header-image {
+  z-index: -1;
+  height: 100%;
+  opacity: 0.4;
+  filter: brightness(70%);
+}
 </style>
