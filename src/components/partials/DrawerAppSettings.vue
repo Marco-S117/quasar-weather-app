@@ -14,8 +14,11 @@
       </q-item-section>
     </q-item>
 
-    <q-dialog v-model="modal">
-      <q-card>
+    <q-dialog
+      v-model="modal"
+      :full-width="$q.screen.xs"
+    >
+      <q-card style="width: 325px">
         <q-card-section>
           <div class="text-h6">Settings</div>
         </q-card-section>
