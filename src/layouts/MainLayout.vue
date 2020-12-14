@@ -11,17 +11,14 @@
 </template>
 
 <script>
-import AppHeader from 'components/partials/AppHeader.vue'
-import AppFooter from 'components/partials/AppFooter.vue'
+import AppHeader from 'components/layout/AppHeader.vue'
+import AppFooter from 'components/layout/AppFooter.vue'
 
 export default {
   name: 'MainLayout',
   components: {
     AppHeader,
     AppFooter
-  },
-  mounted () {
-    console.log('Dark mode', this.$q.dark.mode)
   }
 }
 </script>

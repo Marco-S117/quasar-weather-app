@@ -20,30 +20,30 @@
             <h4 class="q-ma-none">Quasar Weather App</h4>
           </q-btn>
         </q-toolbar-title>
-
-        <q-toggle v-model="darkTheme" label="Dark Mode" color="dark" left-label />
       </q-toolbar>
     </q-header>
 
-    <AppDrawer :showDrawer="showDrawer" />
+    <AppDrawer
+      :showDrawer="showDrawer"
+      @onInput="updateDrawerState"
+    />
   </div>
 </template>
 
 <script>
-import { Dark } from 'quasar'
-import AppDrawer from 'components/partials/AppDrawer'
+import AppDrawer from 'components/layout/AppDrawer'
 
 export default {
+  name: 'AppHeader',
   components: {
     AppDrawer
   },
   data: () => ({
-    showDrawer: true,
-    darkTheme: true
+    showDrawer: false
   }),
-  watch: {
-    darkTheme: function () {
-      Dark.toggle()
+  methods: {
+    updateDrawerState (state) {
+      this.showDrawer = state
     }
   }
 }
