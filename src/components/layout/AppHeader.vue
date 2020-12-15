@@ -25,10 +25,8 @@
       <div class="q-pt-lg q-pb-md">
         <q-input
           v-model="location"
-          :loading="!!location"
           placeholder="Find your location"
           label-color="#fff"
-          debounce="500"
           filled
           dense
           class="q-px-md"
@@ -42,6 +40,9 @@
               @click.stop="location=null"
               class="cursor-pointer"
             />
+          </template>
+          <template v-slot:after>
+            <q-btn @click="$root.$emit('onPlaceSearch', location)" round dense flat icon="send" />
           </template>
         </q-input>
       </div>
@@ -77,14 +78,6 @@ export default {
   methods: {
     updateDrawerState (state) {
       this.showDrawer = state
-    }
-  },
-  watch: {
-    location: function (place) {
-      if (place) {
-        console.log('Search for', place)
-        this.$root.$emit('onPlaceSearch', place)
-      }
     }
   }
 }

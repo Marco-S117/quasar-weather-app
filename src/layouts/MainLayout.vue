@@ -55,16 +55,4 @@ span {
   font-size: $text-size;
   line-height: $text-size;
 }
-
-/* Transitions */
-.page-change-enter-active {
-  transition: all 0.2s ease;
-}
-.page-change-leave-active {
-  transition: all 0.1s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.page-change-enter, .page-change-leave-to {
-  opacity: 0;
-  transform: translateY(-40px);
-}
 </style>
