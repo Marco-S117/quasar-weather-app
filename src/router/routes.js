@@ -1,30 +1,51 @@
 
 const routes = [
   {
-    routeName: 'Home',
-    icon: 'home',
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      {
+        name: 'Home',
+        path: '',
+        icon: 'home',
+        component: () => import('pages/IndexPage.vue')
+      },
+      {
+        name: 'About',
+        path: '/about',
+        icon: 'help',
+        component: () => import('pages/AboutPage.vue')
+      },
+      {
+        name: 'Credits',
+        path: '/credits',
+        icon: 'copyright',
+        component: () => import('pages/CreditsPage.vue')
+      }
     ]
   },
   {
-    routeName: 'About',
-    icon: 'info',
-    path: '/about',
+    path: '/api',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/AboutPage.vue') }
-    ]
-  },
-  {
-    routeName: 'Credits',
-    icon: 'copyright',
-    path: '/credits',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/CreditsPage.vue') }
+      {
+        name: 'Weather',
+        path: '/weather',
+        icon: 'home',
+        component: () => import('pages/IndexPage.vue')
+      },
+      {
+        name: 'Astronomy',
+        path: '/astronomy',
+        icon: 'nights_stay',
+        component: () => import('pages/AstronomyPage.vue')
+      },
+      {
+        name: 'Events',
+        path: '/events',
+        icon: 'event_note',
+        component: () => import('pages/EventsPage.vue')
+      }
     ]
   },
   // Always leave this as last one,

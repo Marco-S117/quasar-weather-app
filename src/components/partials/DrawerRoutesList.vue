@@ -1,22 +1,29 @@
 <template>
-  <q-list padding>
+  <q-list>
+    <q-item-label header>Pages</q-item-label>
     <template v-for="(route, index) in appRoutes">
       <q-item
         :key="index"
-        :active="route.path === $route.path"
-        :to="{ path: route.path }"
+        :to="{ name: route.name }"
+        :name="route.name"
+        :icon="route.icon"
+        exact
+        exact-active-class="text-white"
         clickable
         v-ripple
       >
         <q-item-section avatar>
-          <q-icon :name="route.icon" />
+          <q-avatar
+            :icon="route.icon"
+            color="secondary"
+            text-color="white"
+          />
         </q-item-section>
         <q-item-section>
-          {{ route.routeName }}
+          {{ route.name }}
         </q-item-section>
       </q-item>
     </template>
-    <q-separator spaced inset />
   </q-list>
 </template>
 
@@ -25,7 +32,7 @@ export default {
   name: 'DrawerRoutesList',
   computed: {
     appRoutes () {
-      return this.$router.options.routes.filter(route => !!route.routeName && route.routeName !== 'Home')
+      return this.$router.options.routes[0].children
     }
   }
 }

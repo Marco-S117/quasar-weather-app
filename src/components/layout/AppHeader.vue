@@ -26,7 +26,7 @@
         <q-input
           v-model="location"
           placeholder="Find your location"
-          label-color="#fff"
+          dark
           filled
           dense
           class="q-px-md"
@@ -42,7 +42,13 @@
             />
           </template>
           <template v-slot:after>
-            <q-btn @click="$root.$emit('onPlaceSearch', location)" round dense flat icon="send" />
+           <q-btn
+             @click="$root.$emit('onPlaceSearch', location)"
+             round
+             dense
+             flat
+             icon="send"
+           />
           </template>
         </q-input>
       </div>

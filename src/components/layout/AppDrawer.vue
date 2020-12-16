@@ -1,15 +1,10 @@
 <template>
   <q-drawer
     v-model="drawer"
-    :mini="mini"
-    @mouseover="mini = false"
-    @mouseout="mini = true"
     @input="onInput"
-    mini-to-overlay
     :width="250"
     :breakpoint="600"
     bordered
-    content-class="column justify-between"
   >
     <DrawerRoutesList />
     <DrawerAppSettings />
@@ -17,8 +12,8 @@
 </template>
 
 <script>
-import DrawerRoutesList from 'components/partials/DrawerRoutesList'
 import DrawerAppSettings from 'components/partials/DrawerAppSettings'
+import DrawerRoutesList from 'components/partials/DrawerRoutesList'
 
 export default {
   name: 'AppDrawer',
@@ -29,8 +24,8 @@ export default {
     }
   },
   components: {
-    DrawerRoutesList,
-    DrawerAppSettings
+    DrawerAppSettings,
+    DrawerRoutesList
   },
   data: () => ({
     drawer: false,

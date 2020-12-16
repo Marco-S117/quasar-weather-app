@@ -1,37 +1,47 @@
 <template>
-  <q-list padding>
-    <q-separator spaced inset />
-    <q-item
-      @click="modal = !modal"
-      clickable
-      v-ripple
-    >
-      <q-item-section avatar>
-        <q-icon name="settings" />
+  <q-list>
+
+    <!-- General Settings -->
+    <q-item-label header>General</q-item-label>
+    <q-item>
+      <q-item-section
+        @click="geoLocation = !geoLocation"
+        top
+        avatar
+        class="pointer"
+      >
+        <q-avatar
+          :color="geoLocation ? 'positive' : 'negative'"
+          :icon="geoLocation ? 'gps_fixed' : 'gps_off'"
+          text-color="white"
+        />
       </q-item-section>
       <q-item-section>
-        Settings
+        <q-item-label>Device Position</q-item-label>
+        <q-item-label caption lines="2">Detect your position.</q-item-label>
       </q-item-section>
     </q-item>
 
-    <q-dialog
-      v-model="modal"
-      :full-width="$q.screen.xs"
-    >
-      <q-card style="width: 325px">
-        <q-card-section>
-          <div class="text-h6">Settings</div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          <q-toggle v-model="darkTheme" label="Dark Mode" left-label />
-        </q-card-section>
-
-        <q-card-actions align="right">
-          <q-btn flat label="OK" color="primary" v-close-popup />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
+    <!-- Color Settings -->
+    <q-item-label header>Theme</q-item-label>
+    <q-item>
+      <q-item-section
+        @click="darkTheme = !darkTheme"
+        top
+        avatar
+        class="pointer"
+      >
+        <q-avatar
+          :color="darkTheme ? 'positive' : 'negative'"
+          icon="palette"
+          text-color="white"
+        />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>Dark Mode</q-item-label>
+        <q-item-label caption lines="2">Change theme color.</q-item-label>
+      </q-item-section>
+    </q-item>
 
   </q-list>
 </template>
@@ -41,17 +51,24 @@ import { Dark } from 'quasar'
 
 export default {
   data: () => ({
-    modal: false,
+    geoLocation: false,
     darkTheme: true
   }),
+  methods: {
+    toogleGeoLocation () {
+      this.geoLocation = !this.geoLocation
+    }
+  },
   watch: {
     darkTheme: function () {
       Dark.toggle()
+    },
+    geoLocation: function (state) {
+      console.log('Toogle location', state)
     }
   }
 }
 </script>
 
 <style>
-
 </style>
