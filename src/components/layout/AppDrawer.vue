@@ -10,6 +10,7 @@
     <div>
       <DrawerRoutesList />
       <DrawerAppSettings />
+      <DrawerLangSelector />
     </div>
     <DrawerApiLinkBack />
   </q-drawer>
@@ -19,6 +20,7 @@
 import DrawerAppSettings from 'components/partials/DrawerAppSettings'
 import DrawerRoutesList from 'components/partials/DrawerRoutesList'
 import DrawerApiLinkBack from 'components/partials/DrawerApiLinkBack'
+import DrawerLangSelector from 'components/partials/DrawerLangSelector'
 
 export default {
   name: 'AppDrawer',
@@ -31,7 +33,8 @@ export default {
   components: {
     DrawerAppSettings,
     DrawerRoutesList,
-    DrawerApiLinkBack
+    DrawerApiLinkBack,
+    DrawerLangSelector
   },
   data: () => ({
     drawer: false,

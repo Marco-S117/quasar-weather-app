@@ -1,6 +1,6 @@
 <template>
   <q-list>
-    <q-item-label header>Powered by WeatherAPI</q-item-label>
+    <q-item-label header>{{ $t('poweredBy') }}</q-item-label>
     <template>
       <q-item
         clickable
@@ -18,7 +18,6 @@
 
 <script>
 export default {
-
 }
 </script>
 

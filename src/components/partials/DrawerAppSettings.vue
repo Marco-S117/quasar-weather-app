@@ -17,7 +17,7 @@
       </q-item-section>
       <q-item-section>
         <q-item-label>Dark Mode</q-item-label>
-        <q-item-label caption lines="2">Change theme color.</q-item-label>
+        <q-item-label caption lines="2">Change theme color</q-item-label>
       </q-item-section>
     </q-item>
   </q-list>

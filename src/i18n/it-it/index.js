@@ -2,5 +2,5 @@
 // so you can safely delete all default props below
 
 export default {
-  poweredBy: 'Powered by WeatherAPI'
+  poweredBy: 'Offerto da WeatherAPI'
 }
