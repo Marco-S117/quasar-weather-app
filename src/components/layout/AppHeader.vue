@@ -19,7 +19,6 @@
         <q-input
           v-model="location"
           placeholder="Find your location"
-          debounce="750"
           dark
           filled
           dense
@@ -34,17 +33,39 @@
               @click.stop="location=null"
               class="cursor-pointer"
             />
-          </template>
-          <template v-slot:after>
-           <q-btn
-             @click="$root.$emit('onPlaceSearch', location)"
-             round
-             dense
-             flat
-             icon="send"
-           />
+            <q-btn
+              v-show="!!(location && location.length > 3)"
+              @click="searchLocation(location)"
+              :loading="isLoadingSuggestedLocations"
+              round
+              dense
+              flat
+              icon="send"
+            />
           </template>
         </q-input>
+
+        <div class="autocomplete q-px-md">
+          <transition name="autocomplete" mode="out-in">
+            <div
+              v-if="!!(showAutocomplete && suggestedLocations)"
+              class="autocomplete-list"
+            >
+              <p
+                v-for="(location, index) in suggestedLocations"
+                :key="index"
+                class="q-ma-none q-pa-sm q-pl-md"
+              >
+                <span
+                  @click="onSuggestedLocationClick(location.name)"
+                  class="pointer"
+                >
+                  {{ location.name }}
+                </span>
+              </p>
+            </div>
+          </transition>
+        </div>
       </div>
 
       <q-img
@@ -70,18 +91,22 @@ import HeaderBg from 'assets/images/header-bg.jpg'
 export default {
   name: 'AppHeader',
   components: {
-    AppDrawer
+    AppDrawer,
   },
   data: () => ({
     HeaderBg,
     showDrawer: false,
-    location: ''
+    showAutocomplete: false,
+    isLoadingSuggestedLocations: false,
+    location: '',
+    suggestedLocations: []
   }),
   methods: {
     updateDrawerState (state) {
       this.showDrawer = state
     },
     searchLocation (location) {
+      this.isLoadingSuggestedLocations = true
       console.log('Calling API, search:', location)
       const AXIOS_PARAMS = {
         key: '45129826589045a4a67172834201512',
@@ -93,16 +118,25 @@ export default {
         })
         .then(response => {
           console.log('Autocomplete', response.data)
+          this.suggestedLocations = response.data.slice(0, 4)
+          this.showAutocomplete = true
         })
         .catch(error => {
           console.log('Go to location error page')
         })
+        .finally(() => {
+          this.isLoadingSuggestedLocations = false
+        })
+    },
+    onSuggestedLocationClick (location) {
+      this.location = null
+      this.$root.$emit('onPlaceSearch', location)
     }
   },
   watch: {
     location: function (search) {
-      if (!!(search && search.length > 3)) {
-        this.searchLocation(search)
+      if (search === null) {
+        this.showAutocomplete = false
       }
     }
   }
@@ -115,5 +149,29 @@ export default {
   height: 100%;
   opacity: 0.4;
   filter: brightness(70%);
+}
+
+.autocomplete-list {
+  height: 130px;
+  border-radius: 0 0 4px 4px;
+  background: rgba(255, 255, 255, 0.07);
+  padding-left: 8px;
+
+  span:hover {
+    color: red;
+  }
+}
+
+.autocomplete-enter-active,
+.autocomplete-leave-active {
+  transition: all 0.2s ease;
+  opacity: 1;
+  max-height: 130px;
+}
+
+.autocomplete-enter,
+.autocomplete-leave-to {
+  opacity: 0;
+  max-height: 0;
 }
 </style>
