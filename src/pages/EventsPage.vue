@@ -1,12 +1,15 @@
 <template>
   <q-page padding>
-    <h1>Events Page - {{ location }}</h1>
+    <h1>Sports Page - {{ location }}</h1>
+    {{ events }}
   </q-page>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'IndexPage',
+  name: 'SportsPage',
   props: {
     location: {
       type: String,
@@ -18,9 +21,28 @@ export default {
       this.getLocationEvents()
     }
   },
+  data: () => ({
+    events: null
+  }),
   methods: {
     getLocationEvents () {
       console.log('Calling events API')
+      this.$q.loading.show()
+      const AXIOS_PARAMS = {
+        key: '45129826589045a4a67172834201512',
+        q: this.location
+      }
+      axios
+        .get('https://api.weatherapi.com/v1/sports.json', {
+          params: AXIOS_PARAMS
+        })
+        .then(response => {
+          this.events = response.data
+        })
+        .catch(error => {
+          console.log('Go to location error page')
+        })
+        .finally(() => this.$q.loading.hide())
     }
   },
   watch: {

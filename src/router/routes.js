@@ -29,7 +29,7 @@ const routes = [
         component: () => import('pages/AstronomyPage.vue')
       },
       {
-        name: 'Events',
+        name: 'Sports',
         path: '/api/events',
         icon: 'event_note',
         component: () => import('pages/EventsPage.vue')

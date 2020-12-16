@@ -1,10 +1,13 @@
 <template>
   <q-page padding>
-    <h1>Index Page - {{ location }}</h1>
+    <h1>Weather Page - {{ location }}</h1>
+    {{ weather }}
   </q-page>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'IndexPage',
   props: {
@@ -18,9 +21,28 @@ export default {
       this.getLocationWeather()
     }
   },
+  data: () => ({
+    weather: null
+  }),
   methods: {
     getLocationWeather () {
       console.log('Calling weather API')
+      this.$q.loading.show()
+      const AXIOS_PARAMS = {
+        key: '45129826589045a4a67172834201512',
+        q: this.location
+      }
+      axios
+        .get('https://api.weatherapi.com/v1/current.json', {
+          params: AXIOS_PARAMS
+        })
+        .then(response => {
+          this.weather = response.data
+        })
+        .catch(error => {
+          console.log('Go to location error page')
+        })
+        .finally(() => this.$q.loading.hide())
     }
   },
   watch: {
