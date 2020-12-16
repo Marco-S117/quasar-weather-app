@@ -6,16 +6,31 @@
 
 <script>
 export default {
-  name: 'EventsPage',
+  name: 'IndexPage',
   props: {
     location: {
       type: String,
       required: true
     }
+  },
+  beforeMount () {
+    if (!!this.location) {
+      this.getLocationEvents()
+    }
+  },
+  methods: {
+    getLocationEvents () {
+      console.log('Calling events API')
+    }
+  },
+  watch: {
+    location: function (value) {
+      console.log(value)
+      if (!!value) {
+        console.log(`[${this.$route.name} Page] New weather API call with location: ${value}`)
+        this.getLocationEvents()
+      }
+    }
   }
 }
 </script>
-
-<style>
-
-</style>

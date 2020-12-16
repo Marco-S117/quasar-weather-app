@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -18,55 +18,52 @@ export default {
     this.$root.$off('onPlaceSearch')
   },
   mounted () {
-    this.getUserLocation()
+    this.checkAccessDevicePosition()
   },
   data: () => ({
-    // axiosDisabled: true,
-    // errored: false,
-    // errorMessage: '',
-    position: 'Barrafranca'
+    position: ''
   }),
   methods: {
-    getUserLocation () {
-      if (!this.place) {
+    checkAccessDevicePosition () {
+      if (!this.position) {
         if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((location) => {
-            console.log(location);
-            console.log(`Current location:\nLat [${location.coords.latitude}] Lon [${location.coords.longitude}]`)
-            // this.getCurrentWeather(location.coords.latitude, location.coords.longitude)
-          })
+          navigator.geolocation.getCurrentPosition(this.onAccessAllowed, this.onAccessDenied)
         }
       }
     },
-    // getCurrentWeather (lat, lon) {
-    //   if (!this.axiosDisabled) {
-    //     this.$q.loading.show()
-    //     this.errored = false
+    onAccessAllowed (location) {
+      console.log(`Location access allowed! Current location:\nLat [${location.coords.latitude}] Lon [${location.coords.longitude}]`)
+      this.getCurrentLocationName(location.coords.latitude, location.coords.longitude)
+    },
+    onAccessDenied (data) {
+      console.log('Location access denied, set default location.', data)
+      this.position = 'Barrafranca'
+    },
+    getCurrentLocationName (lat, lon) {
+      this.$q.loading.show()
+      this.errored = false
 
-    //     const AXIOS_PARAMS = {
-    //       key: '45129826589045a4a67172834201512',
-    //       q: this.position ? this.position : `${lat},${lon}`
-    //     }
+      const AXIOS_PARAMS = {
+        key: '45129826589045a4a67172834201512',
+        q: `${lat},${lon}`
+      }
 
-    //     // axios
-    //     //   .get('https://api.weatherapi.com/v1/current.json', {
-    //     //     params: AXIOS_PARAMS
-    //     //   })
-    //     //   .then(response => {
-    //     //     console.log(response)
-    //     //     this.currentWeather = response.data
-    //     //   })
-    //     //   .catch(error => {
-    //     //     this.errorMessage = error
-    //     //     this.errored = true
-    //     //   })
-    //     //   .finally(() => this.$q.loading.hide())
-    //   }
-    // },
+      axios
+        .get('https://api.weatherapi.com/v1/current.json', {
+          params: AXIOS_PARAMS
+        })
+        .then(response => {
+          this.position = response.data.location.name
+        })
+        .catch(error => {
+          console.log('Go to location error page')
+        })
+        .finally(() => this.$q.loading.hide())
+    },
     onLocationSearch (place) {
-      console.log('New place from search:', place)
-      this.position = place
-      // this.getCurrentWeather()
+      if (!!place) {
+        this.position = place
+      }
     }
   }
 }

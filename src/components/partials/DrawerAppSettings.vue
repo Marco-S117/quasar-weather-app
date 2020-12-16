@@ -1,8 +1,7 @@
 <template>
   <q-list>
-
     <!-- General Settings -->
-    <q-item-label header>General</q-item-label>
+    <q-item-label header>Settings</q-item-label>
     <q-item>
       <q-item-section
         @click="geoLocation = !geoLocation"
@@ -21,9 +20,7 @@
         <q-item-label caption lines="2">Detect your position.</q-item-label>
       </q-item-section>
     </q-item>
-
     <!-- Color Settings -->
-    <q-item-label header>Theme</q-item-label>
     <q-item>
       <q-item-section
         @click="darkTheme = !darkTheme"
@@ -42,7 +39,6 @@
         <q-item-label caption lines="2">Change theme color.</q-item-label>
       </q-item-section>
     </q-item>
-
   </q-list>
 </template>
 

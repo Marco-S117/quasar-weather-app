@@ -8,7 +8,7 @@
         :to="{ name: route.name }"
         :name="route.name"
         :icon="route.icon"
-        :label="$q.screen.md ? route.name : null"
+        :label="$q.screen.md || $q.screen.lg || $q.screen.xl ? route.name : null"
         exact
         replace
       />
@@ -27,7 +27,7 @@ export default {
     //   return date.formatDate(timestamp, 'dddd D MMMM YYYY')
     // },
     tabRoutes () {
-      return this.$router.options.routes[1].children
+      return this.$router.options.routes[0].children.filter(route => route.name !== 'About' && route.name !== 'Credits')
     }
   }
 }

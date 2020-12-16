@@ -6,7 +6,7 @@ const routes = [
     children: [
       {
         name: 'Home',
-        path: '',
+        path: '/',
         icon: 'home',
         component: () => import('pages/IndexPage.vue')
       },
@@ -21,28 +21,16 @@ const routes = [
         path: '/credits',
         icon: 'copyright',
         component: () => import('pages/CreditsPage.vue')
-      }
-    ]
-  },
-  {
-    path: '/api',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      {
-        name: 'Weather',
-        path: '/weather',
-        icon: 'home',
-        component: () => import('pages/IndexPage.vue')
       },
       {
         name: 'Astronomy',
-        path: '/astronomy',
+        path: '/api/astronomy',
         icon: 'nights_stay',
         component: () => import('pages/AstronomyPage.vue')
       },
       {
         name: 'Events',
-        path: '/events',
+        path: '/api/events',
         icon: 'event_note',
         component: () => import('pages/EventsPage.vue')
       }

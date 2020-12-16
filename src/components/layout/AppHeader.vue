@@ -11,14 +11,7 @@
           @click="showDrawer = !showDrawer"
         />
         <q-toolbar-title>
-          <q-btn
-            :to="{ path: '/' }"
-            flat
-            dense
-          >
-            <q-icon name="home" class="q-mr-sm" />
-            <h4 class="q-ma-none">Quasar Weather App</h4>
-          </q-btn>
+          <h4 class="q-ma-none">Quasar Weather App</h4>
         </q-toolbar-title>
       </q-toolbar>
 

@@ -12,6 +12,24 @@ export default {
       type: String,
       required: true
     }
+  },
+  beforeMount () {
+    if (!!this.location) {
+      this.getLocationWeather()
+    }
+  },
+  methods: {
+    getLocationWeather () {
+      console.log('Calling weather API')
+    }
+  },
+  watch: {
+    location: function (value) {
+      if (!!value) {
+        console.log(`[${this.$route.name} Page] New weather API call with location: ${value}`)
+        this.getLocationWeather()
+      }
+    }
   }
 }
 </script>
