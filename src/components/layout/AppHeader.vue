@@ -19,6 +19,7 @@
         <q-input
           v-model="location"
           placeholder="Find your location"
+          debounce="750"
           dark
           filled
           dense
@@ -61,6 +62,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 import AppDrawer from 'components/layout/AppDrawer'
 import HeaderBg from 'assets/images/header-bg.jpg'
 
@@ -77,6 +80,30 @@ export default {
   methods: {
     updateDrawerState (state) {
       this.showDrawer = state
+    },
+    searchLocation (location) {
+      console.log('Calling API, search:', location)
+      const AXIOS_PARAMS = {
+        key: '45129826589045a4a67172834201512',
+        q: location
+      }
+      axios
+        .get('https://api.weatherapi.com/v1/search.json', {
+          params: AXIOS_PARAMS
+        })
+        .then(response => {
+          console.log('Autocomplete', response.data)
+        })
+        .catch(error => {
+          console.log('Go to location error page')
+        })
+    }
+  },
+  watch: {
+    location: function (search) {
+      if (!!(search && search.length > 3)) {
+        this.searchLocation(search)
+      }
     }
   }
 }

@@ -5,15 +5,20 @@
     :width="250"
     :breakpoint="600"
     bordered
+    content-class="column justify-between"
   >
-    <DrawerRoutesList />
-    <DrawerAppSettings />
+    <div>
+      <DrawerRoutesList />
+      <DrawerAppSettings />
+    </div>
+    <DrawerApiLinkBack />
   </q-drawer>
 </template>
 
 <script>
 import DrawerAppSettings from 'components/partials/DrawerAppSettings'
 import DrawerRoutesList from 'components/partials/DrawerRoutesList'
+import DrawerApiLinkBack from 'components/partials/DrawerApiLinkBack'
 
 export default {
   name: 'AppDrawer',
@@ -25,7 +30,8 @@ export default {
   },
   components: {
     DrawerAppSettings,
-    DrawerRoutesList
+    DrawerRoutesList,
+    DrawerApiLinkBack
   },
   data: () => ({
     drawer: false,
