@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <h1>Index Page</h1>
+    <h1>Index Page - {{ location }}</h1>
   </q-page>
 </template>
 

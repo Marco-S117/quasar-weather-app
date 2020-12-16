@@ -5,7 +5,7 @@
     <q-page-container>
       <transition name="page-change" mode="out-in" appear leave-absolute>
         <keep-alive>
-          <router-view />
+          <router-view :location="location" />
         </keep-alive>
       </transition>
     </q-page-container>
@@ -21,6 +21,12 @@ export default {
   components: {
     AppHeader,
     AppFooter
+  },
+  props: {
+    location: {
+      type: String,
+      required: true
+    }
   }
 }
 </script>
