@@ -16,7 +16,7 @@
         <q-img :src="logo" class="fit rotating" />
       </q-avatar>
       <h1 class="q-px-md">WeatherApp</h1>
-      <p>Loading</p>
+      <p>Accept o decline detect device location to continue</p>
     </div>
   </q-img>
 </template>

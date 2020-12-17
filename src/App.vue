@@ -44,7 +44,7 @@ export default {
     },
     onAccessDenied (data) {
       console.log('Location access denied, set default location.', data)
-      this.position = 'Barrafranca'
+      this.getCurrentLocationName(null, null, 'Barrafranca')
     },
     getCurrentLocationName (lat, lon, place) {
       const AXIOS_PARAMS = {
@@ -58,7 +58,6 @@ export default {
         })
         .then(response => {
           this.position = response.data
-          console.log(this.position)
           setTimeout(() => {
             this.isReady = true
           }, 1000)
@@ -70,6 +69,13 @@ export default {
     onLocationSearch (place) {
       if (!!place) {
         this.getCurrentLocationName(null, null, place)
+      }
+    }
+  },
+  watch: {
+    position: function (position) {
+      if (!!(position && !this.isReady)) {
+        this.isReady = true
       }
     }
   }
