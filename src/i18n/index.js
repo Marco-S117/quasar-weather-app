@@ -1,4 +1,4 @@
-import it from './it-IT'
+import it from './it-it'
 import en from './en-us'
 
 export default {
