@@ -5,16 +5,22 @@
     <q-page-container>
       <transition name="page-change" mode="out-in" appear leave-absolute>
         <keep-alive>
-          <router-view :location="location" />
+          <router-view :content="content" />
         </keep-alive>
       </transition>
     </q-page-container>
+    <q-img
+      :src="HeaderBg"
+      class="header-image absolute-top"
+      position="top"
+    />
   </q-layout>
 </template>
 
 <script>
 import AppHeader from 'components/layout/AppHeader.vue'
 import AppFooter from 'components/layout/AppFooter.vue'
+import HeaderBg from 'assets/images/bg.jpg'
 
 export default {
   name: 'MainLayout',
@@ -23,11 +29,14 @@ export default {
     AppFooter
   },
   props: {
-    location: {
-      type: String,
+    content: {
+      type: Object,
       required: true
     }
-  }
+  },
+  data: () => ({
+    HeaderBg
+  })
 }
 </script>
 
@@ -60,5 +69,23 @@ p,
 span {
   font-size: $text-size;
   line-height: $text-size;
+}
+
+.header-image {
+  z-index: -1;
+  height: 100%;
+  opacity: 0.4;
+  filter: brightness(0.4);
+}
+
+.autocomplete-list {
+  height: 130px;
+  border-radius: 0 0 4px 4px;
+  background: rgba(255, 255, 255, 0.07);
+  padding-left: 8px;
+
+  span:hover {
+    color: red;
+  }
 }
 </style>

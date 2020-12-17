@@ -1,13 +1,19 @@
 <template>
   <div id="q-app">
-    <router-view :location="position" />
+    <transition name="simple-fade" mode="out-in">
+      <LoadingScreen v-if="!isReady" />
+      <router-view v-else :content="position" />
+    </transition>
   </div>
 </template>
 <script>
-import axios from 'axios'
+import LoadingScreen from 'components/layout/AppLoadingScreen'
 
 export default {
   name: 'App',
+  components: {
+    LoadingScreen
+  },
   created () {
     this.$q.dark.set(true)
   },
@@ -21,7 +27,8 @@ export default {
     this.checkAccessDevicePosition()
   },
   data: () => ({
-    position: ''
+    isReady: false,
+    position: null
   }),
   methods: {
     checkAccessDevicePosition () {
@@ -40,7 +47,6 @@ export default {
       this.position = 'Barrafranca'
     },
     getCurrentLocationName (lat, lon) {
-      this.$q.loading.show()
       this.errored = false
 
       const AXIOS_PARAMS = {
@@ -48,17 +54,19 @@ export default {
         q: `${lat},${lon}`
       }
 
-      axios
+      this.$axios
         .get('https://api.weatherapi.com/v1/current.json', {
           params: AXIOS_PARAMS
         })
         .then(response => {
-          this.position = response.data.location.name
+          this.position = response.data
+          setTimeout(() => {
+            this.isReady = true
+          }, 1000)
         })
         .catch(error => {
           console.log('Go to location error page')
         })
-        .finally(() => this.$q.loading.hide())
     },
     onLocationSearch (place) {
       if (!!place) {

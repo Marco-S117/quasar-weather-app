@@ -1,23 +1,23 @@
 <template>
   <q-page padding>
-    <h1>Sports Page - {{ location }}</h1>
+    <h1>Sports Page - {{ content.location.country }}</h1>
     {{ events }}
   </q-page>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'SportsPage',
   props: {
-    location: {
-      type: String,
+    content: {
+      type: Object,
       required: true
     }
   },
   beforeMount () {
-    if (!!this.location) {
+    if (!!(this.content && this.content.location.country)) {
       this.getLocationEvents()
     }
   },
@@ -30,9 +30,9 @@ export default {
       this.$q.loading.show()
       const AXIOS_PARAMS = {
         key: '45129826589045a4a67172834201512',
-        q: this.location
+        q: this.content.location.country
       }
-      axios
+      this.$axios
         .get('https://api.weatherapi.com/v1/sports.json', {
           params: AXIOS_PARAMS
         })

@@ -19,6 +19,7 @@
         <q-input
           v-model="location"
           placeholder="Find your location"
+          debounce="750"
           dark
           filled
           dense
@@ -30,17 +31,8 @@
           <template v-slot:append v-if="!!location">
             <q-icon
               name="cancel"
-              @click.stop="location=null"
+              @click.stop="clearSearchBar"
               class="cursor-pointer"
-            />
-            <q-btn
-              v-show="!!(location && location.length > 3)"
-              @click="searchLocation(location)"
-              :loading="isLoadingSuggestedLocations"
-              round
-              dense
-              flat
-              icon="send"
             />
           </template>
         </q-input>
@@ -48,7 +40,7 @@
         <div class="autocomplete q-px-md">
           <transition name="autocomplete" mode="out-in">
             <div
-              v-if="!!(showAutocomplete && suggestedLocations)"
+              v-if="showAutocomplete"
               class="autocomplete-list"
             >
               <p
@@ -67,12 +59,6 @@
           </transition>
         </div>
       </div>
-
-      <q-img
-        :src="HeaderBg"
-        class="header-image absolute-top"
-        position="bottom"
-      />
     </q-header>
 
     <AppDrawer
@@ -83,10 +69,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 import AppDrawer from 'components/layout/AppDrawer'
-import HeaderBg from 'assets/images/header-bg.jpg'
 
 export default {
   name: 'AppHeader',
@@ -94,12 +77,12 @@ export default {
     AppDrawer,
   },
   data: () => ({
-    HeaderBg,
     showDrawer: false,
     showAutocomplete: false,
     isLoadingSuggestedLocations: false,
     location: '',
-    suggestedLocations: []
+    suggestedLocations: [],
+    isSuggestedLocationClicked: false
   }),
   methods: {
     updateDrawerState (state) {
@@ -112,7 +95,7 @@ export default {
         key: '45129826589045a4a67172834201512',
         q: location
       }
-      axios
+      this.$axios
         .get('https://api.weatherapi.com/v1/search.json', {
           params: AXIOS_PARAMS
         })
@@ -129,14 +112,24 @@ export default {
         })
     },
     onSuggestedLocationClick (location) {
-      this.location = null
+      this.location = location
+      this.showAutocomplete = false
+      this.isSuggestedLocationClicked = true
       this.$root.$emit('onPlaceSearch', location)
+    },
+    clearSearchBar () {
+      if (this.location) {
+        this.location = null
+        this.showAutocomplete = false
+      }
     }
   },
   watch: {
     location: function (search) {
-      if (search === null) {
-        this.showAutocomplete = false
+      if (!!(!this.isSuggestedLocationClicked && search && search.length > 3)) {
+        this.searchLocation(search)
+      } else {
+        this.isSuggestedLocationClicked = false
       }
     }
   }
@@ -144,24 +137,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header-image {
-  z-index: -1;
-  height: 100%;
-  opacity: 0.4;
-  filter: brightness(70%);
-}
-
-.autocomplete-list {
-  height: 130px;
-  border-radius: 0 0 4px 4px;
-  background: rgba(255, 255, 255, 0.07);
-  padding-left: 8px;
-
-  span:hover {
-    color: red;
-  }
-}
-
 .autocomplete-enter-active,
 .autocomplete-leave-active {
   transition: all 0.2s ease;

@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <h1>Astronomy Page - {{ location }}</h1>
+    <h1>Astronomy Page - {{ content.location.name }}</h1>
     {{ astronomy }}
   </q-page>
 </template>
@@ -11,13 +11,13 @@ import axios from 'axios'
 export default {
   name: 'IndexPage',
   props: {
-    location: {
-      type: String,
+    content: {
+      type: Object,
       required: true
     }
   },
   beforeMount () {
-    if (!!this.location) {
+    if (!!(this.content && this.content.location.name)) {
       this.getLocationAstronomy()
     }
   },
@@ -30,9 +30,9 @@ export default {
       this.$q.loading.show()
       const AXIOS_PARAMS = {
         key: '45129826589045a4a67172834201512',
-        q: this.location
+        q: this.content.location.name
       }
-      axios
+      this.$axios
         .get('https://api.weatherapi.com/v1/astronomy.json', {
           params: AXIOS_PARAMS
         })
