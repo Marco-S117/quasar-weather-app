@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  name: 'DrawerLangSelector',
   computed: {
     otherLang () {
       return this.$i18n.availableLocales.filter(lang => lang !== this.$i18n.locale)[0]

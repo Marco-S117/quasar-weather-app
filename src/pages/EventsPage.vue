@@ -9,7 +9,7 @@
 // import axios from 'axios'
 
 export default {
-  name: 'SportsPage',
+  name: 'EventsPage',
   props: {
     content: {
       type: Object,

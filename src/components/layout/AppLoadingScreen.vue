@@ -26,6 +26,7 @@ import bgImage from 'assets/images/bg.jpg'
 import logo from 'assets/images/quasar-logo.svg'
 
 export default {
+  name: 'AppLoadingScreen',
   data: () => ({
     bgImage,
     logo

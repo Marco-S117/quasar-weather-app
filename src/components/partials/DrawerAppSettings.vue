@@ -27,6 +27,7 @@
 import { Dark } from 'quasar'
 
 export default {
+  name: 'DrawerAppSettings',
   data: () => ({
     geoLocation: false,
     darkTheme: true
