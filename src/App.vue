@@ -18,13 +18,14 @@ export default {
     this.$q.dark.set(true)
   },
   beforeMount () {
+    this.$root.$on('onAppLoaded', () => {
+      this.$root.$off('onAppLoaded')
+      this.checkAccessDevicePosition()
+    })
     this.$root.$on('onPlaceSearch', this.onLocationSearch)
   },
   beforeDestroy () {
     this.$root.$off('onPlaceSearch')
-  },
-  mounted () {
-    this.checkAccessDevicePosition()
   },
   data: () => ({
     isReady: false,
@@ -58,9 +59,7 @@ export default {
         })
         .then(response => {
           this.position = response.data
-          setTimeout(() => {
-            this.isReady = true
-          }, 1000)
+          this.isReady = true
         })
         .catch(error => {
           console.log('Go to location error page')
@@ -69,13 +68,6 @@ export default {
     onLocationSearch (place) {
       if (!!place) {
         this.getCurrentLocationName(null, null, place)
-      }
-    }
-  },
-  watch: {
-    position: function (position) {
-      if (!!(position && !this.isReady)) {
-        this.isReady = true
       }
     }
   }
