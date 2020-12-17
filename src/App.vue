@@ -2,7 +2,7 @@
   <div id="q-app">
     <transition name="simple-fade" mode="out-in">
       <LoadingScreen v-if="!isReady" />
-      <router-view v-else :content="position" />
+      <router-view v-else-if="!!position" :content="position" />
     </transition>
   </div>
 </template>
@@ -46,12 +46,10 @@ export default {
       console.log('Location access denied, set default location.', data)
       this.position = 'Barrafranca'
     },
-    getCurrentLocationName (lat, lon) {
-      this.errored = false
-
+    getCurrentLocationName (lat, lon, place) {
       const AXIOS_PARAMS = {
         key: '45129826589045a4a67172834201512',
-        q: `${lat},${lon}`
+        q: place ? place : `${lat},${lon}`
       }
 
       this.$axios
@@ -60,6 +58,7 @@ export default {
         })
         .then(response => {
           this.position = response.data
+          console.log(this.position)
           setTimeout(() => {
             this.isReady = true
           }, 1000)
@@ -70,7 +69,7 @@ export default {
     },
     onLocationSearch (place) {
       if (!!place) {
-        this.position = place
+        this.getCurrentLocationName(null, null, place)
       }
     }
   }

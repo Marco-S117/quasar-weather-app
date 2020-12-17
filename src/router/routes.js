@@ -24,13 +24,13 @@ const routes = [
       },
       {
         name: 'Astronomy',
-        path: '/api/astronomy',
+        path: '/astronomy',
         icon: 'nights_stay',
         component: () => import('pages/AstronomyPage.vue')
       },
       {
         name: 'Sports',
-        path: '/api/events',
+        path: '/events',
         icon: 'event_note',
         component: () => import('pages/EventsPage.vue')
       }
