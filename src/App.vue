@@ -1,12 +1,22 @@
 <template>
   <div id="q-app">
+    <q-img
+      :placeholder-src="bgImage"
+      :src="bgImage"
+      :ratio="16/9"
+      no-default-spinner
+      img-class="filter"
+      class="fixed-full absolute-full bg-image"
+    />
     <transition name="simple-fade" mode="out-in">
       <LoadingScreen v-if="!isReady" />
       <router-view v-else-if="!!position" :content="position" />
     </transition>
   </div>
 </template>
+
 <script>
+import bgImage from 'assets/images/bg.jpg'
 import LoadingScreen from 'components/layout/AppLoadingScreen'
 
 export default {
@@ -29,6 +39,7 @@ export default {
   },
   data: () => ({
     isReady: false,
+    bgImage,
     position: null
   }),
   methods: {
@@ -80,6 +91,37 @@ body {
   overflow: hidden;
 }
 
+h1 {
+  font-size: $h1-size;
+  line-height: $h1-size;
+}
+h2 {
+  font-size: $h2-size;
+  line-height: $h2-size;
+}
+h3 {
+  font-size: $h3-size;
+  line-height: $h3-size;
+}
+h4 {
+  font-size: $h4-size;
+  line-height: $h4-size;
+}
+h5 {
+  font-size: $h5-size;
+  line-height: $h5-size;
+}
+h6 {
+  font-size: $h6-size;
+  line-height: $h6-size;
+}
+p,
+span {
+  font-size: $text-size;
+  line-height: $text-size;
+}
+
+/* Global Helper Classes */
 .pointer {
   cursor: pointer;
 }
@@ -104,5 +146,12 @@ body {
 }
 .simple-fade-enter, .simple-fade-leave-to {
   opacity: 0;
+}
+
+.bg-image {
+  z-index: -1;
+  height: 100%;
+  opacity: 0.4;
+  filter: brightness(0.6);
 }
 </style>

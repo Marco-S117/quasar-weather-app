@@ -1,71 +1,69 @@
 <template>
-  <div>
-    <q-header>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="showDrawer = !showDrawer"
-        />
-        <q-toolbar-title>
-          <h4 class="q-ma-none">Quasar Weather App</h4>
-        </q-toolbar-title>
-      </q-toolbar>
+  <q-header>
+    <q-toolbar>
+      <q-btn
+        flat
+        dense
+        round
+        icon="menu"
+        aria-label="Menu"
+        @click="showDrawer = !showDrawer"
+      />
+      <q-toolbar-title>
+        <h4 class="q-ma-none">Quasar Weather App</h4>
+      </q-toolbar-title>
+    </q-toolbar>
 
-      <div class="q-pt-lg q-pb-md">
-        <q-input
-          v-model="location"
-          placeholder="Find your location"
-          debounce="750"
-          dark
-          filled
-          dense
-          class="q-px-md"
-        >
-          <template v-slot:prepend>
-            <q-icon name="place" />
-          </template>
-          <template v-slot:append v-if="!!location">
-            <q-icon
-              name="cancel"
-              @click.stop="clearSearchBar"
-              class="cursor-pointer"
-            />
-          </template>
-        </q-input>
+    <div class="q-pt-lg q-pb-md">
+      <q-input
+        v-model="location"
+        placeholder="Find your location"
+        debounce="750"
+        dark
+        filled
+        dense
+        class="q-px-md"
+      >
+        <template v-slot:prepend>
+          <q-icon name="place" />
+        </template>
+        <template v-slot:append v-if="!!location">
+          <q-icon
+            name="cancel"
+            @click.stop="clearSearchBar"
+            class="cursor-pointer"
+          />
+        </template>
+      </q-input>
 
-        <div class="autocomplete q-px-md">
-          <transition name="autocomplete" mode="out-in">
-            <div
-              v-if="showAutocomplete"
-              class="autocomplete-list"
+      <div class="autocomplete q-px-md">
+        <transition name="autocomplete" mode="out-in">
+          <div
+            v-if="showAutocomplete"
+            class="autocomplete-list"
+          >
+            <p
+              v-for="(location, index) in suggestedLocations"
+              :key="index"
+              class="q-ma-none q-pa-sm q-pl-md"
             >
-              <p
-                v-for="(location, index) in suggestedLocations"
-                :key="index"
-                class="q-ma-none q-pa-sm q-pl-md"
+              <span
+                @click="onSuggestedLocationClick(location.name)"
+                class="pointer"
               >
-                <span
-                  @click="onSuggestedLocationClick(location.name)"
-                  class="pointer"
-                >
-                  {{ location.name }}
-                </span>
-              </p>
-            </div>
-          </transition>
-        </div>
+                {{ location.name }}
+              </span>
+            </p>
+          </div>
+        </transition>
       </div>
-    </q-header>
+    </div>
 
     <AppDrawer
       :showDrawer="showDrawer"
       @onInput="updateDrawerState"
     />
-  </div>
+  </q-header>
 </template>
 
 <script>
@@ -148,5 +146,16 @@ export default {
 .autocomplete-leave-to {
   opacity: 0;
   max-height: 0;
+}
+
+.autocomplete-list {
+  height: 130px;
+  border-radius: 0 0 4px 4px;
+  background: rgba(255, 255, 255, 0.07);
+  padding-left: 8px;
+
+  span:hover {
+    color: #50afe6;
+  }
 }
 </style>

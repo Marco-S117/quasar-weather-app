@@ -1,41 +1,31 @@
 <template>
-  <q-img
-    :placeholder-src="bgImage"
-    :src="bgImage"
-    :ratio="16/9"
-    no-default-spinner
-    img-class="filter"
-    class="fixed-full absolute-full"
-  >
-    <div class="absolute-center text-center rounded-borders bg-transparent">
-      <q-avatar
-        size="80px"
-        font-size="80px"
-        class="q-my-md"
-      >
-        <transition-group name="icon-transition" tag="div" class="fixed-full absolute-full">
-          <q-img
-            v-for="(icon, i) in icons"
-            :key="`key-${i}`"
-            :src="icon.component"
-            no-default-spinner
-            v-show="currentIndex === i"
-            :class="{
-              'icon': currentIndex !== (icons.length - 1)
-            }"
-          />
-        </transition-group>
-      </q-avatar>
-      <span class="block text-h4 q-my-sm">WeatherApp</span>
-      <transition name="string-change" mode="out-in">
-        <span :key="currentIndex" class="block">{{ loadingString }}</span>
-      </transition>
-    </div>
-  </q-img>
+  <div class="absolute-center text-center rounded-borders bg-transparent">
+    <q-avatar
+      size="80px"
+      font-size="80px"
+      class="q-my-md"
+    >
+      <transition-group name="icon-transition" tag="div" class="fixed-full absolute-full">
+        <q-img
+          v-for="(icon, i) in icons"
+          :key="`key-${i}`"
+          :src="icon.component"
+          no-default-spinner
+          v-show="currentIndex === i"
+          :class="{
+            'icon': currentIndex !== (icons.length - 1)
+          }"
+        />
+      </transition-group>
+    </q-avatar>
+    <span class="block text-h4 q-my-sm">WeatherApp</span>
+    <transition name="string-change" mode="out-in">
+      <span :key="currentIndex" class="block">{{ loadingString }}</span>
+    </transition>
+  </div>
 </template>
 
 <script>
-import bgImage from 'assets/images/bg.jpg'
 
 import DaySvg from 'assets/images/day.svg'
 import NightSvg from 'assets/images/night.svg'
@@ -56,7 +46,6 @@ const ICONS = [
 export default {
   name: 'AppLoadingScreen',
   data: () => ({
-    bgImage,
     icons: ICONS,
     loadingStrings: [
 
@@ -81,10 +70,6 @@ export default {
 </script>
 
 <style lang="scss">
-.filter {
-  filter: brightness(0.6);
-}
-
 .icon {
   transform: scale(2);
 }
