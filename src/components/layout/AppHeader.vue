@@ -7,7 +7,7 @@
         round
         icon="menu"
         aria-label="Menu"
-        @click="$root.$emit('ToggleDrawer', true)"
+        @click="$root.$emit('ToggleDrawer')"
       />
       <q-toolbar-title>
         <h4 class="q-ma-none">Quasar Weather App</h4>
@@ -40,20 +40,26 @@
         <transition name="autocomplete" mode="out-in">
           <div
             v-if="showAutocomplete"
+            :class="{ 'zero-results': !suggestedLocations.length }"
             class="autocomplete-list"
           >
-            <p
-              v-for="(location, index) in suggestedLocations"
-              :key="index"
-              class="q-ma-none q-pa-sm q-pl-md"
-            >
-              <span
-                @click="onSuggestedLocationClick(location.name)"
-                class="pointer"
+            <div v-if="suggestedLocations.length">
+              <p
+                v-for="(location, index) in suggestedLocations"
+                :key="index"
+                class="q-ma-none q-pa-sm q-px-md ellipsis"
               >
-                {{ location.name }}
-              </span>
-            </p>
+                <span
+                  @click="onSuggestedLocationClick(location.name)"
+                  class="pointer"
+                >
+                  {{ location.name }}
+                </span>
+              </p>
+            </div>
+            <div v-else>
+              <p class="q-ma-none q-pa-sm q-px-md">Location not found, search another one.</p>
+            </div>
           </div>
         </transition>
       </div>
@@ -136,10 +142,13 @@ export default {
 }
 
 .autocomplete-list {
-  height: 130px;
+  height: 120px;
   border-radius: 0 0 4px 4px;
   background: rgba(255, 255, 255, 0.07);
-  padding-left: 8px;
+
+  &.zero-results {
+    height: 30px;
+  }
 
   span:hover {
     color: #50afe6;

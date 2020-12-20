@@ -1,7 +1,6 @@
 <template>
   <q-drawer
     v-model="drawer"
-    @input="toggleDrawer"
     :width="250"
     :breakpoint="600"
     bordered
@@ -34,12 +33,11 @@ export default {
     this.$root.$on('ToggleDrawer', this.toggleDrawer)
   },
   data: () => ({
-    drawer: false,
-    mini: true
+    drawer: false
   }),
   methods: {
-    toggleDrawer (state) {
-      this.drawer = state
+    toggleDrawer () {
+      this.drawer = !this.drawer
     }
   }
 }
