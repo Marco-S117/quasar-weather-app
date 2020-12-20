@@ -86,9 +86,11 @@ export default {
 </script>
 <style lang="scss">
 /* Global rules */
-html,
-body {
-  overflow: hidden;
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
 }
 
 h1 {

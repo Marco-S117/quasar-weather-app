@@ -1,15 +1,25 @@
 <template>
   <q-page padding>
-    <h1>Astronomy Page - {{ content.location.name }}</h1>
-    {{ astronomy }}
+    <transition name="simple-fade" mode="out-in">
+      <Astronomy
+        v-if="!!astronomy"
+        :astronomy="astronomy"
+      />
+      <AstronomySkeleton v-else />
+    </transition>
   </q-page>
 </template>
 
 <script>
-import axios from 'axios'
+import Astronomy from 'components/weather/Astronomy'
+import AstronomySkeleton from 'components/loaders/AstronomySkeleton'
 
 export default {
   name: 'IndexPage',
+  components: {
+    Astronomy,
+    AstronomySkeleton
+  },
   props: {
     content: {
       type: Object,
@@ -26,8 +36,6 @@ export default {
   }),
   methods: {
     getLocationAstronomy () {
-      console.log('Calling astronomy API')
-      this.$q.loading.show()
       const AXIOS_PARAMS = {
         key: '45129826589045a4a67172834201512',
         q: this.content.location.name
@@ -42,13 +50,11 @@ export default {
         .catch(error => {
           console.log('Go to location error page')
         })
-        .finally(() => this.$q.loading.hide())
     }
   },
   watch: {
-    location: function (value) {
+    content: function (value) {
       if (!!value) {
-        console.log(`[${this.$route.name} Page] New weather API call with location: ${value}`)
         this.getLocationAstronomy()
       }
     }

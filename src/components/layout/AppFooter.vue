@@ -1,5 +1,5 @@
 <template>
-  <q-footer reveal>
+  <q-footer :reveal="$q.screen.xs">
     <!-- <span>{{ today }}</span> -->
     <q-tabs>
       <q-route-tab
@@ -8,7 +8,7 @@
         :to="{ name: route.name }"
         :name="route.name"
         :icon="route.icon"
-        :label="$q.screen.md || $q.screen.lg || $q.screen.xl ? route.name : null"
+        :label="$q.screen.sm || $q.screen.md || $q.screen.lg || $q.screen.xl ? route.name : null"
         exact
         replace
       />

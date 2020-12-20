@@ -1,15 +1,26 @@
 <template>
   <q-page padding>
-    <h1>Sports Page - {{ content.location.country }}</h1>
-    {{ events }}
+    <transition name="simple-fade" mode="out-in">
+      <EventsCountry
+        v-if="!!(events && content.location.country)"
+        :country="content.location.country"
+        :events="events"
+      />
+      <EventsSkeleton v-else />
+    </transition>
   </q-page>
 </template>
 
 <script>
-// import axios from 'axios'
+import EventsCountry from 'components/events/EventsCountry'
+import EventsSkeleton from 'components/loaders/EventsSkeleton'
 
 export default {
   name: 'EventsPage',
+  components: {
+    EventsCountry,
+    EventsSkeleton
+  },
   props: {
     content: {
       type: Object,
@@ -26,8 +37,6 @@ export default {
   }),
   methods: {
     getLocationEvents () {
-      console.log('Calling events API')
-      this.$q.loading.show()
       const AXIOS_PARAMS = {
         key: '45129826589045a4a67172834201512',
         q: this.content.location.country
@@ -42,14 +51,11 @@ export default {
         .catch(error => {
           console.log('Go to location error page')
         })
-        .finally(() => this.$q.loading.hide())
     }
   },
   watch: {
-    location: function (value) {
-      console.log(value)
+    content: function (value) {
       if (!!value) {
-        console.log(`[${this.$route.name} Page] New weather API call with location: ${value}`)
         this.getLocationEvents()
       }
     }

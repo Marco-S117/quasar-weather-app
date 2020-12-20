@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  name: 'WeatherConditionIcon',
   props: {
     code: {
       type: Number,
