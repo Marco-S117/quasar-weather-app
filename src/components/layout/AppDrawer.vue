@@ -1,7 +1,7 @@
 <template>
   <q-drawer
     v-model="drawer"
-    @input="onInput"
+    @input="toggleDrawer"
     :width="250"
     :breakpoint="600"
     bordered
@@ -24,29 +24,21 @@ import DrawerLangSelector from 'components/partials/DrawerLangSelector'
 
 export default {
   name: 'AppDrawer',
-  props: {
-    showDrawer: {
-      type: Boolean,
-      required: false
-    }
-  },
   components: {
     DrawerAppSettings,
     DrawerRoutesList,
     DrawerApiLinkBack,
     DrawerLangSelector
   },
+  beforeMount () {
+    this.$root.$on('ToggleDrawer', this.toggleDrawer)
+  },
   data: () => ({
     drawer: false,
     mini: true
   }),
   methods: {
-    onInput (state) {
-      this.$emit('onInput', state)
-    }
-  },
-  watch: {
-    showDrawer: function (state) {
+    toggleDrawer (state) {
       this.drawer = state
     }
   }

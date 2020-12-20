@@ -7,7 +7,7 @@
         round
         icon="menu"
         aria-label="Menu"
-        @click="showDrawer = !showDrawer"
+        @click="$root.$emit('ToggleDrawer', true)"
       />
       <q-toolbar-title>
         <h4 class="q-ma-none">Quasar Weather App</h4>
@@ -58,24 +58,14 @@
         </transition>
       </div>
     </div>
-
-    <AppDrawer
-      :showDrawer="showDrawer"
-      @onInput="updateDrawerState"
-    />
   </q-header>
 </template>
 
 <script>
-import AppDrawer from 'components/layout/AppDrawer'
 
 export default {
   name: 'AppHeader',
-  components: {
-    AppDrawer,
-  },
   data: () => ({
-    showDrawer: false,
     showAutocomplete: false,
     isLoadingSuggestedLocations: false,
     location: '',
@@ -83,9 +73,6 @@ export default {
     isSuggestedLocationClicked: false
   }),
   methods: {
-    updateDrawerState (state) {
-      this.showDrawer = state
-    },
     searchLocation (location) {
       this.isLoadingSuggestedLocations = true
       console.log('Calling API, search:', location)
