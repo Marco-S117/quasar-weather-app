@@ -111,7 +111,6 @@ export default {
     clearSearchBar () {
       if (this.location) {
         this.location = null
-        this.showAutocomplete = false
       }
     }
   },
@@ -121,6 +120,7 @@ export default {
         this.searchLocation(search)
       } else {
         this.isSuggestedLocationClicked = false
+        this.showAutocomplete = false
       }
     }
   }

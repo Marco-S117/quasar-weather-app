@@ -4,7 +4,12 @@
     <AppDrawer />
     <AppFooter />
     <q-page-container>
-      <transition name="page-change" mode="out-in" appear leave-absolute>
+      <transition
+        appear
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+        mode="out-in"
+      >
         <keep-alive>
           <router-view :content="content" />
         </keep-alive>

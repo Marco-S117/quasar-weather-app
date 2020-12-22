@@ -1,6 +1,11 @@
 <template>
   <q-page padding>
-    <transition name="simple-fade" mode="out-in">
+    <transition
+      appear
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut"
+      mode="out-in"
+    >
       <WeatherCondition
         v-if="!!weather"
         :weather="weather"
@@ -46,7 +51,6 @@ export default {
         })
         .then(response => {
           this.weather = response.data
-          console.log(this.weather)
         })
         .catch(error => {
           console.log('Go to location error page')

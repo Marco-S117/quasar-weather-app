@@ -1,6 +1,11 @@
 <template>
   <q-page padding>
-    <transition name="simple-fade" mode="out-in">
+    <transition
+      appear
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut"
+      mode="out-in"
+    >
       <Astronomy
         v-if="!!astronomy"
         :astronomy="astronomy"
