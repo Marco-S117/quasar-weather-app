@@ -7,15 +7,20 @@ A Quasar Framework app
 yarn
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Start the app in SPA development mode
 ```bash
 quasar dev
 ```
 
-
-### Build the app for production
+### Build the SPA app for production
 ```bash
 quasar build
+```
+
+### Start or Build the app in PWA
+```bash
+quasar dev --mode pwa
+quasar build --mode pwa
 ```
 
 ### Customize the configuration
