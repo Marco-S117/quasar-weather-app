@@ -11,14 +11,12 @@
       <DrawerAppSettings />
       <DrawerLangSelector />
     </div>
-    <DrawerApiLinkBack />
   </q-drawer>
 </template>
 
 <script>
 import DrawerAppSettings from 'components/partials/DrawerAppSettings'
 import DrawerRoutesList from 'components/partials/DrawerRoutesList'
-import DrawerApiLinkBack from 'components/partials/DrawerApiLinkBack'
 import DrawerLangSelector from 'components/partials/DrawerLangSelector'
 
 export default {
@@ -26,7 +24,6 @@ export default {
   components: {
     DrawerAppSettings,
     DrawerRoutesList,
-    DrawerApiLinkBack,
     DrawerLangSelector
   },
   beforeMount () {
