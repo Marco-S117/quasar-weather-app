@@ -23,9 +23,17 @@ quasar dev --mode pwa
 quasar build --mode pwa
 ```
 
-### Test the app
+### Generate PWA icons
+###### ICON_PATH = /path/to/source/icon.png
+###### BG_PATH = [-b /path/to/background.png]
+```bash
+icongenie generate -m pwa -i ICON_PATH BG_PATH
+```
+
+
+#### Test the app
 [SPA](https://marco-s117.github.io/quasar-weather-app/dist/spa)
 [PWA](https://marco-s117.github.io/quasar-weather-app/dist/pwa)
 
-### Customize the configuration
+#### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
