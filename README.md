@@ -24,10 +24,9 @@ quasar build --mode pwa
 ```
 
 ### Generate PWA icons
-###### ICON_PATH = /path/to/source/icon.png
-###### BG_PATH = [-b /path/to/background.png]
+See all options [here](https://quasar.dev/icongenie/command-list)
 ```bash
-icongenie generate -m pwa -i ICON_PATH BG_PATH
+icongenie generate [options]
 ```
 
 
