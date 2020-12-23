@@ -1,7 +1,0 @@
-directories:
-  output: 'C:\Users\Marco Polino\Documents\Coding\personal\quasar-weather-app\dist\electron\Packaged'
-  buildResources: 'C:\Users\Marco Polino\Documents\Coding\personal\quasar-weather-app\src-electron'
-  app: 'C:\Users\Marco Polino\Documents\Coding\personal\quasar-weather-app\dist\electron\UnPackaged'
-appId: quasar-weather-app
-productName: Quasar Weather App
-electronVersion: 9.4.0

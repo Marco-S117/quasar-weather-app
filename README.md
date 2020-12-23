@@ -7,20 +7,14 @@ A Quasar Framework app
 yarn
 ```
 
-### Start the app in SPA development mode
+### Start the app in development mode
 ```bash
-quasar dev
+quasar dev -m spa|pwa|electron
 ```
 
-### Build the SPA app for production
+### Build the app for production
 ```bash
-quasar build
-```
-
-### Start or Build the app in PWA
-```bash
-quasar dev --mode pwa
-quasar build --mode pwa
+quasar build -m spa|pwa|electron
 ```
 
 ### Generate PWA icons
@@ -33,7 +27,6 @@ icongenie generate [options]
 #### Test the app
 [SPA](https://marco-s117.github.io/quasar-weather-app/dist/spa)
 [PWA](https://marco-s117.github.io/quasar-weather-app/dist/pwa)
-[ELECTRON](./dist/electron)
 
 #### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
