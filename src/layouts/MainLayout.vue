@@ -11,7 +11,8 @@
         mode="out-in"
       >
         <keep-alive>
-          <router-view v-if="!!(content && !isLoading)" :content="content" />
+          <Loading v-if="isLoading" />
+          <router-view v-else-if="!!(content && !isLoading)" :content="content" />
         </keep-alive>
       </transition>
     </q-page-container>
@@ -22,13 +23,15 @@
 import AppHeader from 'components/layout/AppHeader.vue'
 import AppDrawer from 'components/layout/AppDrawer'
 import AppFooter from 'components/layout/AppFooter.vue'
+import Loading from 'components/layout/AppLoadingScreen'
 
 export default {
   name: 'MainLayout',
   components: {
     AppHeader,
     AppDrawer,
-    AppFooter
+    AppFooter,
+    Loading
   },
   props: {
     content: {
@@ -38,7 +41,16 @@ export default {
   },
   data: () => ({
     isLoading: false
-  })
+  }),
+  mounted () {
+    this.$root.$on('onAPILoadingStart', () => { this.isLoading = true })
+    this.$root.$on('onAPILoadingEnd', () => { this.isLoading = false })
+  },
+  watch: {
+    isLoading: function (state) {
+      console.log('App loading', state)
+    }
+  }
 }
 </script>
 

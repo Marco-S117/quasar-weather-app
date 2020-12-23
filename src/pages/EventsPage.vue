@@ -28,6 +28,7 @@ export default {
   }),
   methods: {
     getLocationEvents () {
+      this.$root.$emit('onAPILoadingStart')
       const AXIOS_PARAMS = {
         key: '45129826589045a4a67172834201512',
         q: this.content.location.country
@@ -41,6 +42,9 @@ export default {
         })
         .catch(error => {
           console.log('Go to location error page')
+        })
+        .finally(() => {
+          this.$root.$emit('onAPILoadingEnd')
         })
     }
   },
