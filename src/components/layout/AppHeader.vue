@@ -17,7 +17,8 @@
     <div class="q-pt-lg q-pb-md">
       <q-input
         v-model="location"
-        placeholder="Find your location"
+        color="secondary"
+        label="Search location"
         debounce="750"
         dark
         filled
@@ -153,5 +154,14 @@ export default {
   span:hover {
     color: #50afe6;
   }
+}
+
+.test {
+  color: red;
+}
+
+.active {
+  background-color: #fff;
+  color: #fff;
 }
 </style>
