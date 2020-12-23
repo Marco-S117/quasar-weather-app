@@ -14,36 +14,27 @@
       leave-active-class="animated fadeOut"
       mode="out-in"
     >
-      <LoadingScreen v-if="!isReady" />
-      <router-view v-else-if="!!position" :content="position" />
+      <router-view v-if="!!position" :content="position" />
     </transition>
   </div>
 </template>
 
 <script>
 import bgImage from 'assets/images/bg.jpg'
-import LoadingScreen from 'components/layout/AppLoadingScreen'
 
 export default {
   name: 'App',
-  components: {
-    LoadingScreen
-  },
   created () {
     this.$q.dark.set(true)
   },
   beforeMount () {
-    this.$root.$on('onAppLoaded', () => {
-      this.$root.$off('onAppLoaded')
-      this.checkAccessDevicePosition()
-    })
     this.$root.$on('onPlaceSearch', this.onLocationSearch)
+    this.checkAccessDevicePosition()
   },
   beforeDestroy () {
     this.$root.$off('onPlaceSearch')
   },
   data: () => ({
-    isReady: false,
     bgImage,
     position: null
   }),
@@ -75,7 +66,6 @@ export default {
         })
         .then(response => {
           this.position = response.data
-          this.isReady = true
         })
         .catch(error => {
           console.log('Go to location error page')

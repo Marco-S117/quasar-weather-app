@@ -1,30 +1,16 @@
 <template>
-  <q-page padding>
-    <transition
-      appear
-      enter-active-class="animated fadeIn"
-      leave-active-class="animated fadeOut"
-      mode="out-in"
-    >
-      <EventsCountry
-        v-if="!!(events && content.location.country)"
-        :country="content.location.country"
-        :events="events"
-      />
-      <EventsSkeleton v-else />
-    </transition>
+  <q-page v-if="!!(events && content.location.country)" padding>
+    <EventsCountry :country="content.location.country" :events="events" />
   </q-page>
 </template>
 
 <script>
 import EventsCountry from 'components/events/EventsCountry'
-import EventsSkeleton from 'components/loaders/EventsSkeleton'
 
 export default {
   name: 'EventsPage',
   components: {
-    EventsCountry,
-    EventsSkeleton
+    EventsCountry
   },
   props: {
     content: {

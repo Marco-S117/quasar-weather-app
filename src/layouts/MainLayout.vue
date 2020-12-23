@@ -11,7 +11,7 @@
         mode="out-in"
       >
         <keep-alive>
-          <router-view :content="content" />
+          <router-view v-if="!!(content && !isLoading)" :content="content" />
         </keep-alive>
       </transition>
     </q-page-container>
@@ -35,7 +35,10 @@ export default {
       type: Object,
       required: true
     }
-  }
+  },
+  data: () => ({
+    isLoading: false
+  })
 }
 </script>
 

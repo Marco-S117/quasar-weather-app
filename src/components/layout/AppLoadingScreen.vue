@@ -47,17 +47,13 @@ export default {
   name: 'AppLoadingScreen',
   data: () => ({
     icons: ICONS,
-    loadingStrings: [
-
-    ],
+    loadingStrings: [],
     currentIndex: 0
   }),
   mounted () {
     let interval = setInterval(() => {
       if (this.currentIndex < (this.icons.length - 1)) {
         this.currentIndex++
-      } else {
-        this.$root.$emit('onAppLoaded')
       }
     }, 1500)
   },

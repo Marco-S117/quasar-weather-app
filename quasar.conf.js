@@ -38,7 +38,7 @@ module.exports = function (/* ctx */) {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      'roboto-font', // optional, you are not bound to it
+      // 'roboto-font', // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it
     ],
 
@@ -108,10 +108,7 @@ module.exports = function (/* ctx */) {
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {
-        skipWaiting: true,
-        clientsClaim: true
-      }, // only for GenerateSW
+      workboxOptions: {}, // only for GenerateSW
       manifest: {
         name: `Quasar Weather App`,
         short_name: `Weather App`,

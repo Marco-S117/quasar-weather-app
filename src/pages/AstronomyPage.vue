@@ -1,29 +1,16 @@
 <template>
-  <q-page padding>
-    <transition
-      appear
-      enter-active-class="animated fadeIn"
-      leave-active-class="animated fadeOut"
-      mode="out-in"
-    >
-      <Astronomy
-        v-if="!!astronomy"
-        :astronomy="astronomy"
-      />
-      <AstronomySkeleton v-else />
-    </transition>
+  <q-page v-if="!!astronomy" padding>
+    <Astronomy :astronomy="astronomy" />
   </q-page>
 </template>
 
 <script>
 import Astronomy from 'components/weather/Astronomy'
-import AstronomySkeleton from 'components/loaders/AstronomySkeleton'
 
 export default {
   name: 'IndexPage',
   components: {
-    Astronomy,
-    AstronomySkeleton
+    Astronomy
   },
   props: {
     content: {

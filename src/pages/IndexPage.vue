@@ -1,29 +1,16 @@
 <template>
-  <q-page padding>
-    <transition
-      appear
-      enter-active-class="animated fadeIn"
-      leave-active-class="animated fadeOut"
-      mode="out-in"
-    >
-      <WeatherCondition
-        v-if="!!weather"
-        :weather="weather"
-      />
-      <WeatherConditionSkeleton v-else />
-    </transition>
+  <q-page v-if="!!weather" padding>
+    <WeatherCondition :weather="weather" />
   </q-page>
 </template>
 
 <script>
 import WeatherCondition from 'components/weather/WeatherCondition'
-import WeatherConditionSkeleton from 'components/loaders/WeatherConditionSkeleton'
 
 export default {
   name: 'IndexPage',
   components: {
-    WeatherCondition,
-    WeatherConditionSkeleton
+    WeatherCondition
   },
   props: {
     content: {
