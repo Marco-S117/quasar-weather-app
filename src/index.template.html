@@ -35,8 +35,37 @@
     <!-- iPad Pro 12.9" -->
     <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" href="icons/apple-launch-2048x2732.png">
   </head>
+  <style>
+    body {
+      background-color: #2e5486;
+    }
+    .no-script-body {
+      color: #2e5486;
+      background-color: #f1f1f1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 6px #333;
+      text-align: center;
+      font-family: SEN;
+    }
+    .no-script-image {
+      width: 150px;
+      height: auto;
+    }
+  </style>
   <body>
     <!-- DO NOT touch the following DIV -->
     <div id="q-app"></div>
+    <noscript>
+      <div class="no-script-body">
+        <img src="/no-script-image.png" alt="no-script-image" title="no-script-image" class="no-script-image">
+        <h1>Javascript Error</h1>
+        <p>Please enabled Javascript to continue</p>
+      </div>
+    </noscript>
   </body>
 </html>
