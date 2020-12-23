@@ -1,8 +1,8 @@
 <template>
   <div id="q-app">
     <q-img
-      :placeholder-src="bgImage"
-      :src="bgImage"
+      :placeholder-src="currentThemeImage"
+      :src="currentThemeImage"
       :ratio="16/9"
       no-default-spinner
       img-class="filter"
@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import bgImage from 'assets/images/bg.jpg'
+import bgSkyTheme from 'assets/images/bg-sky.jpg'
+import bgMoonTheme from 'assets/images/bg-moon.jpg'
 
 export default {
   name: 'App',
@@ -28,6 +29,9 @@ export default {
     this.$q.dark.set(true)
   },
   beforeMount () {
+    /* Testing change app theme */
+    this.$root.$on('onThemeChange', this.changeTheme)
+
     this.$root.$on('onPlaceSearch', this.onLocationSearch)
     this.checkAccessDevicePosition()
   },
@@ -35,9 +39,19 @@ export default {
     this.$root.$off('onPlaceSearch')
   },
   data: () => ({
-    bgImage,
+    bgSkyTheme,
+    bgMoonTheme,
+    currentTheme: 'sky',
     position: null
   }),
+  computed: {
+    /* Testing change app theme */
+    currentThemeImage () {
+      return this.currentTheme === 'sky'
+        ? this.bgSkyTheme
+        : this.bgMoonTheme
+    }
+  },
   methods: {
     checkAccessDevicePosition () {
       if (!this.position) {
@@ -75,6 +89,11 @@ export default {
       if (!!place) {
         this.getCurrentLocationName(null, null, place)
       }
+    },
+    /* Testing change app theme */
+    changeTheme (theme) {
+      console.log(theme)
+      this.currentTheme = theme
     }
   }
 }
