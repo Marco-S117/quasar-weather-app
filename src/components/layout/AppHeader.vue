@@ -155,13 +155,4 @@ export default {
     color: #50afe6;
   }
 }
-
-.test {
-  color: red;
-}
-
-.active {
-  background-color: #fff;
-  color: #fff;
-}
 </style>
