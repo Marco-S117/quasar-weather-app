@@ -10,9 +10,16 @@
         leave-active-class="animated fadeOut"
         mode="out-in"
       >
+        <Loading v-if="isLoading" />
+      </transition>
+      <transition
+        appear
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+        mode="out-in"
+      >
         <keep-alive>
-          <Loading v-if="isLoading" />
-          <router-view v-else-if="!!(content && !isLoading)" :content="content" />
+          <router-view v-if="!!(content && !isLoading)" :content="content" />
         </keep-alive>
       </transition>
     </q-page-container>

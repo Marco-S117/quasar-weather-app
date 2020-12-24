@@ -23,8 +23,12 @@ export default {
   },
   computed: {
     iconPath () {
-      let isDay = this.isDay === 1 ? 'day' : 'night'
-      return require(`../../assets/conditions_icons/${this.code}-${isDay}.svg`)
+      if (this.code === 1000) {
+        let isDay = this.isDay === 1 ? 'day' : 'night'
+        return require(`../../assets/conditions_icons/${this.code}-${isDay}.svg`)
+      } else {
+        return require(`../../assets/conditions_icons/${this.code}.svg`)
+      }
     }
   }
 }
