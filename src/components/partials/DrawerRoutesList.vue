@@ -15,8 +15,8 @@
         <q-item-section avatar>
           <q-avatar
             :icon="route.icon"
-            color="secondary"
-            text-color="white"
+            color="white"
+            text-color="primary"
           />
         </q-item-section>
         <q-item-section>

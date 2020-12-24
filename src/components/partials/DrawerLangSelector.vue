@@ -9,9 +9,9 @@
       >
         <q-avatar
           @click="$i18n.locale = otherLang"
-          color="secondary"
           icon="translate"
-          text-color="white"
+          color="white"
+          text-color="primary"
         />
       </q-item-section>
       <q-item-section>

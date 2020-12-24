@@ -45,11 +45,6 @@ export default {
   mounted () {
     this.$root.$on('onAPILoadingStart', () => { this.isLoading = true })
     this.$root.$on('onAPILoadingEnd', () => { this.isLoading = false })
-  },
-  watch: {
-    isLoading: function (state) {
-      console.log('App loading', state)
-    }
   }
 }
 </script>

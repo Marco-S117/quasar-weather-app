@@ -13,11 +13,10 @@
         <h4 class="q-ma-none">Quasar Weather App</h4>
       </q-toolbar-title>
     </q-toolbar>
-
     <div class="q-pt-lg q-pb-md">
       <q-input
         v-model="location"
-        color="secondary"
+        color="white"
         label="Search location"
         debounce="750"
         dark
@@ -36,7 +35,6 @@
           />
         </template>
       </q-input>
-
       <div class="autocomplete q-px-md">
         <transition name="autocomplete" mode="out-in">
           <div
@@ -82,7 +80,6 @@ export default {
   methods: {
     searchLocation (location) {
       this.isLoadingSuggestedLocations = true
-      console.log('Calling API, search:', location)
       const AXIOS_PARAMS = {
         key: '45129826589045a4a67172834201512',
         q: location
@@ -92,7 +89,6 @@ export default {
           params: AXIOS_PARAMS
         })
         .then(response => {
-          console.log('Autocomplete', response.data)
           this.suggestedLocations = response.data.slice(0, 4)
           this.showAutocomplete = true
         })

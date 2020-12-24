@@ -1,18 +1,16 @@
 <template>
-  <div>
-    <q-img
-      :src="iconPath"
-      :ratio="1"
-      width="80px"
-      height="80px"
-      no-default-spinner
-    />
-  </div>
+  <q-img
+    :src="iconPath"
+    no-default-spinner
+    transition="fade-transition"
+    width="100px"
+    height="100px"
+  />
 </template>
 
 <script>
 export default {
-  name: 'WeatherConditionIcon',
+  name: 'ConditionIcon',
   props: {
     code: {
       type: Number,
@@ -26,12 +24,11 @@ export default {
   computed: {
     iconPath () {
       let isDay = this.isDay === 1 ? 'day' : 'night'
-      return require('../../assets/conditions_icons/' + this.code + '-' + isDay + '.svg')
+      return require(`../../assets/conditions_icons/${this.code}-${isDay}.svg`)
     }
   }
 }
 </script>
 
 <style>
-
 </style>

@@ -1,6 +1,5 @@
 <template>
   <q-footer :reveal="$q.screen.xs">
-    <!-- <span>{{ today }}</span> -->
     <q-tabs>
       <q-route-tab
         v-for="route in tabRoutes"
@@ -17,15 +16,9 @@
 </template>
 
 <script>
-import { date } from 'quasar'
-
 export default {
   name: 'AppFooter',
   computed: {
-    // today () {
-    //   let timestamp = new Date()
-    //   return date.formatDate(timestamp, 'dddd D MMMM YYYY')
-    // },
     tabRoutes () {
       return this.$router.options.routes[0].children.filter(route => route.name !== 'About' && route.name !== 'Credits')
     }

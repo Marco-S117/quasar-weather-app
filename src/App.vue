@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import bgSkyTheme from 'assets/images/bg-sky.jpg'
-import bgMoonTheme from 'assets/images/bg-moon.jpg'
+import { colors } from 'quasar'
+const { setBrand } = colors
 
 export default {
   name: 'App',
@@ -29,27 +29,42 @@ export default {
     this.$q.dark.set(true)
   },
   beforeMount () {
-    /* Testing change app theme */
     this.$root.$on('onThemeChange', this.changeTheme)
-
     this.$root.$on('onPlaceSearch', this.onLocationSearch)
-    this.checkAccessDevicePosition()
   },
   beforeDestroy () {
     this.$root.$off('onPlaceSearch')
   },
+  mounted () {
+    this.checkAccessDevicePosition()
+  },
   data: () => ({
-    bgSkyTheme,
-    bgMoonTheme,
-    currentTheme: 'sky',
+    themesColors: {
+      sky: {
+        primary: '#1C72B5',
+        secondary: '#7ca5c4',
+        dark: '#0D1A24',
+        info: '#7dc9e0'
+      },
+      moon: {
+        primary: '#C04D68',
+        secondary: '#c28392',
+        dark: '#382037',
+        info: '#907894'
+      },
+      nature: {
+        primary: '#7ABA8B',
+        secondary: '#608B84',
+        dark: '#0F292B',
+        info: '#BADB94'
+      }
+    },
+    activeTheme: 'sky',
     position: null
   }),
   computed: {
-    /* Testing change app theme */
     currentThemeImage () {
-      return this.currentTheme === 'sky'
-        ? this.bgSkyTheme
-        : this.bgMoonTheme
+      return require(`assets/images/bg-${this.activeTheme}.jpg`)
     }
   },
   methods: {
@@ -90,10 +105,12 @@ export default {
         this.getCurrentLocationName(null, null, place)
       }
     },
-    /* Testing change app theme */
     changeTheme (theme) {
-      console.log(theme)
-      this.currentTheme = theme
+      this.activeTheme = theme
+      setBrand('primary', this.themesColors[this.activeTheme].primary)
+      setBrand('secondary', this.themesColors[this.activeTheme].secondary)
+      setBrand('dark', this.themesColors[this.activeTheme].dark)
+      setBrand('info', this.themesColors[this.activeTheme].info)
     }
   }
 }

@@ -1,69 +1,49 @@
 <template>
-  <div class="absolute-full fit text-center rounded-borders loading-overlay">
+  <div
+    :class="`${theme}-loading-overlay`"
+    class="absolute-full fit text-center rounded-borders"
+  >
     <div class="absolute-center">
-      <q-avatar
-        size="80px"
-        font-size="80px"
-        class="q-mb-sm"
-      >
-        <transition-group name="icon-transition" tag="div" class="fixed-full absolute-full">
-          <q-img
-            v-for="(icon, i) in icons"
-            :key="`key-${i}`"
-            :src="icon.component"
-            no-default-spinner
-            v-show="currentIndex === i"
-            class="icon"
-          />
-        </transition-group>
-      </q-avatar>
-      <span class="block text-h4 q-my-sm">Loading</span>
-      <transition name="string-change" mode="out-in">
-        <span :key="currentIndex" class="block">{{ loadingString }}</span>
-      </transition>
+      <ConditionIcon
+        :code="code"
+        :isDay="1"
+      />
+      <p class="text-primary text-subtitle1 text-uppercase">Loading</p>
     </div>
   </div>
 </template>
 
 <script>
-
-import DaySvg from 'assets/images/day.svg'
-import NightSvg from 'assets/images/night.svg'
-import CloudsSvg from 'assets/images/cloudy-day-1.svg'
-import RainSvg from 'assets/images/rainy-1.svg'
-import ThunderSvg from 'assets/images/thunder.svg'
-
-const ICONS = [
-  { component: DaySvg, string: 'Brighten up the day' },
-  { component: NightSvg, string: 'Calm before the storm' },
-  { component: CloudsSvg, string: 'To be on cloud nine' },
-  { component: RainSvg, string: 'As right as the rain' },
-  { component: ThunderSvg, string: 'Tempest in a teapot' }
-]
+import ConditionIcon from 'components/partials/ConditionIcon'
 
 export default {
   name: 'AppLoadingScreen',
-  data: () => ({
-    icons: ICONS,
-    currentIndex: 0
-  }),
-  mounted () {
-    const MIN = 0, MAX = (this.icons.length - 1)
-    this.currentIndex = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN
+  components: {
+    ConditionIcon
   },
-  computed: {
-    loadingString () {
-      return this.icons[this.currentIndex].string
-    }
+  data: () => ({
+    theme: 'sky',
+    iconsCodes: [1000, 1003, 1006, 1009, 1030, 1063,1066, 1069, 1072, 1087, 1114, 1117, 1135, 1147, 1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189, 1192, 1195, 1198, 1201, 1204, 1207, 1210, 1213, 1216, 1219, 1222, 1225, 1225, 1237, 1240, 1243, 1246, 1249, 1252, 1255, 1258, 1261, 1264, 1273, 1276, 1279, 1282],
+    code: 1006
+  }),
+  beforeMount () {
+    this.$root.$on('onThemeChange', theme => { this.theme = theme })
+  },
+  mounted () {
+    const MIN = 0, MAX = (this.iconsCodes.length - 1)
+    this.code = this.iconsCodes[Math.floor(Math.random() * (MAX - MIN + 1)) + MIN]
   }
 }
 </script>
 
 <style lang="scss">
-.loading-overlay {
-  background-color: rgba(46, 84, 134, 0.4);
+.sky-loading-overlay {
+  background-color: rgba(46, 84, 134, 0.2);
 }
-.icon {
-  transform: scale(1.5);
+.moon-loading-overlay {
+  background-color: rgba(192, 77, 104, 0.2);
+}
+.nature-loading-overlay {
+  background-color: rgba(69, 189, 109, 0.2);
 }
 </style>
