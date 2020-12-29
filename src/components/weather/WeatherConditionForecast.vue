@@ -1,13 +1,6 @@
 <template>
   <div>
-    <div>{{ weather.location.name }}</div>
-    <ConditionIcon
-      :code="weather.current.condition.code"
-      :isDay="weather.current.is_day"
-      :width="50"
-      :height="50"
-    />
-    <div>{{ weather.current.temp_c}} °C</div>
+    <p>{{ day }}</p>
   </div>
 </template>
 
@@ -20,13 +13,13 @@ export default {
     ConditionIcon
   },
   props: {
-    weather: {
+    day: {
       type: Object,
       required: true
     }
   },
   mounted() {
-    console.log(this.weather);
+    console.log('Day forecast', this.day)
   }
 }
 </script>
