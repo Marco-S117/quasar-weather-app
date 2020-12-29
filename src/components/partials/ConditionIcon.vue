@@ -1,10 +1,10 @@
 <template>
   <q-img
     :src="iconPath"
+    :width="iconWidth"
+    :height="iconHeight"
     no-default-spinner
     transition="fade-transition"
-    width="100px"
-    height="100px"
   />
 </template>
 
@@ -18,7 +18,15 @@ export default {
     },
     isDay: {
       type: Number,
-      required: true
+      required: false
+    },
+    width: {
+      type: Number,
+      required: false
+    },
+    height: {
+      type: Number,
+      required: false
     }
   },
   computed: {
@@ -29,6 +37,16 @@ export default {
       } else {
         return require(`../../assets/conditions_icons/${this.code}.svg`)
       }
+    },
+    iconWidth () {
+      return this.$props.width
+        ? this.$props.width + 'px'
+        : 100 + 'px'
+    },
+    iconHeight () {
+      return this.$props.height
+        ? this.$props.height + 'px'
+        : 100 + 'px'
     }
   }
 }
