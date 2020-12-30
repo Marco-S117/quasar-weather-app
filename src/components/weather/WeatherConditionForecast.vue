@@ -50,9 +50,6 @@ export default {
     dayHour (timeStamp) {
       return date.formatDate((timeStamp * 1000), 'HH:mm')
     }
-  },
-  mounted() {
-    console.log('Day forecast', this.day)
   }
 }
 </script>
