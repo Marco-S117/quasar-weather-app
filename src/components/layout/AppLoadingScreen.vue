@@ -1,7 +1,7 @@
 <template>
   <div
     :class="`${theme}-loading-overlay`"
-    class="absolute-full fit text-center rounded-borders"
+    class="fixed-full fit text-center rounded-borders"
   >
     <div class="absolute-center">
       <ConditionIcon

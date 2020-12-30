@@ -10,7 +10,7 @@
     >
       <span class="text-primary">{{ hour.time_epoch | dayHour }}</span>
       <span class="text-secondary">
-        {{ Math.round(hour.temp_c) }} °C
+        {{ Math.round(hour.temp_c) }}°
       </span>
       <span class="text-info">{{ hour.humidity }}%</span>
       <ConditionIcon

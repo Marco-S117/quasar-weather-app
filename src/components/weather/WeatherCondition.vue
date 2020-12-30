@@ -1,43 +1,92 @@
 <template>
-  <div class="flex column flex-center current-day-weather-container">
-    <div class="text-caption text-secondary">
-      {{ weather.location.region }}, {{ weather.location.country }}
+  <div class="current-day-weather-container row items-center">
+    <div class="col-12 col-md-4 offset-md-1">
+      <div class="flex items-center no-wrap">
+        <ConditionIcon
+          :code="weather.current.condition.code"
+          :isDay="weather.current.is_day"
+          :width="85"
+          :height="85"
+          class="q-mr-md"
+        />
+        <div>
+          <div class="text-caption text-secondary">
+            {{ weather.location.region }}, {{ weather.location.country }}
+          </div>
+          <div class="text-h4 text-primary">
+            {{ weather.location.name }}
+          </div>
+          <div class="text-subtitle1 text-info">
+            {{ weather.current.condition.text }}
+          </div>
+          <div class="text-grey q-mt-md">
+            <q-icon
+              @click="refreshCurrentWeather"
+              :class="{ 'rotating': isRefreshing }"
+              name="refresh"
+              size="22px"
+              class="pointer q-mr-xs"
+            />
+            <span class="text-caption">
+              Last update: {{ weather.current.last_updated_epoch | formatDate }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="text-h4 text-primary">
-      {{ weather.location.name }}
-    </div>
-    <div class="text-subtitle1 text-info">
-      {{ weather.current.condition.text }}
-    </div>
-    <ConditionIcon
-      :code="weather.current.condition.code"
-      :isDay="weather.current.is_day"
-      :width="120"
-      :height="120"
-      class="q-my-sm"
-    />
-    <div class="conditions-info-container q-px-xl">
-      <div class="flex items-center justify-between q-my-sm">
+    <div class="col-12 col-md-4 offset-md-1">
+      <div class="flex items-center">
         <q-img
           :src="ThermometerSvg"
+          no-default-spinner
           width="50px"
           height="50px"
-          no-default-spinner
+          class="q-mr-md"
         />
-        <span>{{ Math.round(weather.current.temp_c ) }} °C</span>
-        <span>{{ Math.round(weather.current.temp_f ) }} °F</span>
-        <span> {{ weather.current.humidity }}%</span>
+        <div>
+          <div class="text-h6 text-uppercase text-secondary">Temperature</div>
+          <div>
+            Min {{ Math.round(weather.forecast.forecastday[0].day.mintemp_c ) }}° -
+            Max {{ Math.round(weather.forecast.forecastday[0].day.maxtemp_c ) }}°
+          </div>
+        </div>
       </div>
-      <div class="flex items-center justify-between q-my-sm">
+      <div class="flex items-center q-my-xl">
+        <q-img
+          :src="HumiditySvg"
+          no-default-spinner
+          width="50px"
+          height="50px"
+          class="q-mr-md"
+        />
+        <div>
+          <div class="text-h6 text-uppercase text-secondary">Humidity</div>
+          <div>
+            Now {{ Math.round(weather.current.humidity) }}% -
+            Avg {{ Math.round(weather.forecast.forecastday[0].day.avghumidity) }}%
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center">
         <q-img
           :src="WindSvg"
+          no-default-spinner
           width="50px"
           height="50px"
-          no-default-spinner
+          class="q-mr-md"
         />
-        <span>{{ weather.current.wind_dir }}</span>
-        <span>{{ weather.current.wind_kph }} kph</span>
-        <span>{{ weather.current.wind_mph }} mph</span>
+        <div>
+          <div class="text-h6 text-uppercase text-secondary">Wind</div>
+          <div>
+            Max {{ weather.forecast.forecastday[0].day.maxwind_kph }} kph -
+            {{ weather.current.wind_dir }}
+            <q-icon
+              :style="{ transform: `rotate(${weather.current.wind_degree}deg)` }"
+              size="16px"
+              name="north"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -47,6 +96,7 @@
 import { date } from 'quasar'
 import ConditionIcon from 'components/partials/ConditionIcon'
 import ThermometerSvg from '../../assets/conditions_icons/thermometer.svg'
+import HumiditySvg from '../../assets/conditions_icons/humidity.svg'
 import WindSvg from '../../assets/conditions_icons/wind.svg'
 
 export default {
@@ -60,13 +110,24 @@ export default {
       required: true
     }
   },
-  data: () => ({
-    ThermometerSvg,
-    WindSvg
-  }),
   filters: {
     formatDate (timeStamp) {
       return date.formatDate((timeStamp * 1000), 'HH:mm, YYYY-MM-DD')
+    }
+  },
+  data: () => ({
+    ThermometerSvg,
+    HumiditySvg,
+    WindSvg,
+    isRefreshing: false
+  }),
+  methods: {
+    refreshCurrentWeather () {
+      this.$emit('onRefreshCurrentWeatherConditions')
+      this.isRefreshing = true
+      setTimeout(() => {
+        this.isRefreshing = false
+      }, 1000)
     }
   }
 }
@@ -80,8 +141,15 @@ export default {
   }
 }
 
-.conditions-info-container {
-  width: 100%;
-  max-width: 600px;
+.rotating {
+  animation: rotating 1s cubic-bezier(0.8, 0.22, 0.08, 0.9);
+  @keyframes rotating {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 </style>

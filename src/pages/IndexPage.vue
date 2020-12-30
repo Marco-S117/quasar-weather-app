@@ -1,6 +1,9 @@
 <template>
   <q-page v-if="!!weather" padding>
-    <WeatherCondition :weather="weather" />
+    <WeatherCondition
+      :weather="weather"
+      @onRefreshCurrentWeatherConditions="getLocationWeather"
+    />
     <div class="row q-my-md">
       <div
         v-for="(day, index) in weather.forecast.forecastday"
