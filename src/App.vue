@@ -5,6 +5,7 @@
       :src="currentThemeImage"
       :ratio="16/9"
       no-default-spinner
+      position="70%"
       img-class="filter"
       class="fixed-full absolute-full bg-image"
     />

@@ -1,16 +1,12 @@
 <template>
   <q-page v-if="!!weather" padding>
-    <h1>Current Day</h1>
     <WeatherCondition :weather="weather" />
-    <div v-if="false">
-      <h1>Forecast</h1>
-      <WeatherConditionForecast
-        v-for="(day, index) in weather.forecast.forecastday"
-        :key="index"
-        :day="day"
-        class="q-my-xl"
-      />
-    </div>
+    <WeatherConditionForecast
+      v-for="(day, index) in weather.forecast.forecastday"
+      :key="index"
+      :day="day"
+      class="q-my-xl"
+    />
   </q-page>
 </template>
 
