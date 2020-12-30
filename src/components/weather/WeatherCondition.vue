@@ -24,15 +24,9 @@
           height="50px"
           no-default-spinner
         />
-        <span>
-          {{ Math.round(weather.current.temp_c ) }} °C
-        </span>
-        <span>
-          {{ Math.round(weather.current.temp_f ) }} °F
-        </span>
-        <span>
-          {{ weather.current.humidity }}%
-        </span>
+        <span>{{ Math.round(weather.current.temp_c ) }} °C</span>
+        <span>{{ Math.round(weather.current.temp_f ) }} °F</span>
+        <span> {{ weather.current.humidity }}%</span>
       </div>
       <div class="flex items-center justify-between q-my-sm">
         <q-img
