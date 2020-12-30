@@ -9,7 +9,7 @@
     <div>
       <DrawerRoutesList />
       <DrawerAppSettings />
-      <DrawerLangSelector />
+      <DrawerLangSelector v-show="false" />
     </div>
   </q-drawer>
 </template>
