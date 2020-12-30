@@ -9,15 +9,15 @@
     "build-all": "quasar build && quasar build -m pwa && quasar build -m electron"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
+    "@quasar/extras": "^1.9.12",
     "@quasar/icongenie": "^2.3.3",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
-    "quasar": "^1.0.0",
+    "quasar": "^1.15.0",
     "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
-    "@quasar/app": "^2.0.0",
+    "@quasar/app": "^2.1.14",
     "devtron": "^1.4.0",
     "electron": "^9.0.0",
     "electron-builder": "^22.4.0",
