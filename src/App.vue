@@ -7,7 +7,7 @@
       :position="currenteThemeImagePosition"
       no-default-spinner
       img-class="filter"
-      class="fixed-full absolute-full bg-image"
+      class="fixed-full bg-image"
     />
     <transition
       appear
