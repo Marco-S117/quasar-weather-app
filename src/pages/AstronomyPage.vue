@@ -41,7 +41,7 @@ export default {
           this.astronomy = response.data
         })
         .catch(error => {
-          console.log('Go to location error page')
+          // console.log('Go to location error page')
         })
         .finally(() => {
           this.$root.$emit('onAPILoadingEnd')

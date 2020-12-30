@@ -88,11 +88,11 @@ export default {
       }
     },
     onAccessAllowed (location) {
-      console.log(`Location access allowed! Current location:\nLat [${location.coords.latitude}] Lon [${location.coords.longitude}]`)
+      // console.log(`Location access allowed! Current location:\nLat [${location.coords.latitude}] Lon [${location.coords.longitude}]`)
       this.getCurrentLocationName(location.coords.latitude, location.coords.longitude)
     },
     onAccessDenied (data) {
-      console.log('Location access denied, set default location.', data)
+      // console.log('Location access denied, set default location.', data)
       this.getCurrentLocationName(null, null, 'Barrafranca')
     },
     getCurrentLocationName (lat, lon, place) {
@@ -109,7 +109,7 @@ export default {
           this.position = response.data
         })
         .catch(error => {
-          console.log('Go to location error page')
+          // console.log('Go to location error page')
         })
     },
     onLocationSearch (place) {

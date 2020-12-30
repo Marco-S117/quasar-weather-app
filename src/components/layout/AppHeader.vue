@@ -93,7 +93,7 @@ export default {
           this.showAutocomplete = true
         })
         .catch(error => {
-          console.log('Go to location error page')
+          // console.log('Go to location error page')
         })
         .finally(() => {
           this.isLoadingSuggestedLocations = false

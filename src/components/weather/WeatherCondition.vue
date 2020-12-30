@@ -64,9 +64,6 @@ export default {
     ThermometerSvg,
     WindSvg
   }),
-  mounted() {
-    console.log(this.weather);
-  },
   filters: {
     formatDate (timeStamp) {
       return date.formatDate((timeStamp * 1000), 'HH:mm, YYYY-MM-DD')
