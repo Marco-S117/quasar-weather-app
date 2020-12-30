@@ -4,6 +4,7 @@
     :width="250"
     :breakpoint="600"
     bordered
+    overlay
     content-class="column justify-between"
   >
     <div>
