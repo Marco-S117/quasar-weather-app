@@ -3,7 +3,7 @@
     <AppHeader />
     <AppDrawer />
     <AppFooter />
-    <q-page-container>
+    <q-page-container class="app-page-container">
       <transition
         appear
         enter-active-class="animated fadeIn"
@@ -57,4 +57,9 @@ export default {
 </script>
 
 <style lang="scss">
+.app-page-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+}
 </style>
