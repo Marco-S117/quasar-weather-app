@@ -1,17 +1,22 @@
 <template>
   <div class="flex column flex-center current-day-weather-container">
-    <div class="text-h6">{{ weather.location.region }}, {{ weather.location.country }}</div>
-    <div class="text-h4">{{ weather.location.name }}</div>
-    <div class="text-h6">{{ weather.current.condition.text }}</div>
-    <!-- <div class="text-caption">{{ weather.location.localtime_epoch | formatDate }}</div> -->
+    <div class="text-caption text-secondary">
+      {{ weather.location.region }}, {{ weather.location.country }}
+    </div>
+    <div class="text-h4 text-primary">
+      {{ weather.location.name }}
+    </div>
+    <div class="text-subtitle1 text-info">
+      {{ weather.current.condition.text }}
+    </div>
     <ConditionIcon
       :code="weather.current.condition.code"
       :isDay="weather.current.is_day"
       :width="120"
       :height="120"
+      class="q-my-sm"
     />
-    <!-- <q-separator spaced inset /> -->
-    <div class="text-left full-width q-px-xl">
+    <div class="conditions-info-container q-px-xl">
       <div class="flex items-center justify-between q-my-sm">
         <q-img
           :src="ThermometerSvg"
@@ -41,7 +46,6 @@
         <span>{{ weather.current.wind_mph }} mph</span>
       </div>
     </div>
-    <div class="q-my-md">Last upadate: {{ weather.current.last_updated_epoch | formatDate }}</div>
   </div>
 </template>
 
@@ -71,8 +75,7 @@ export default {
   },
   filters: {
     formatDate (timeStamp) {
-      return date.formatDate((timeStamp * 1000), 'HH:mm')
-      // return date.formatDate((timeStamp * 1000), 'HH:mm, YYYY-MM-DD')
+      return date.formatDate((timeStamp * 1000), 'HH:mm, YYYY-MM-DD')
     }
   }
 }
@@ -80,6 +83,14 @@ export default {
 
 <style lang="scss">
 .current-day-weather-container {
-  height: calc(100vh - 196px);
+  height: calc(100vh - 234px);
+  @media (max-width: $breakpoint-xs-max) {
+    height: calc(100vh - 196px);
+  }
+}
+
+.conditions-info-container {
+  width: 100%;
+  max-width: 600px;
 }
 </style>
