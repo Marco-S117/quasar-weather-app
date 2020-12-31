@@ -10,7 +10,6 @@
     <div>
       <DrawerRoutesList />
       <DrawerAppSettings />
-      <DrawerLangSelector v-show="false" />
     </div>
   </q-drawer>
 </template>
@@ -18,14 +17,12 @@
 <script>
 import DrawerAppSettings from 'components/partials/DrawerAppSettings'
 import DrawerRoutesList from 'components/partials/DrawerRoutesList'
-import DrawerLangSelector from 'components/partials/DrawerLangSelector'
 
 export default {
   name: 'AppDrawer',
   components: {
     DrawerAppSettings,
-    DrawerRoutesList,
-    DrawerLangSelector
+    DrawerRoutesList
   },
   beforeMount () {
     this.$root.$on('ToggleDrawer', this.toggleDrawer)
