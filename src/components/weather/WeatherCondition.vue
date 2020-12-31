@@ -1,7 +1,7 @@
 <template>
   <div class="current-day-weather-container row items-center">
     <div class="col-12 col-md-4 offset-md-1">
-      <div class="flex items-center no-wrap">
+      <div class="flex items-center justify-center no-wrap">
         <ConditionIcon
           :code="weather.current.condition.code"
           :isDay="weather.current.is_day"
@@ -112,7 +112,7 @@ export default {
   },
   filters: {
     formatDate (timeStamp) {
-      return date.formatDate((timeStamp * 1000), 'HH:mm, YYYY-MM-DD')
+      return date.formatDate((timeStamp * 1000), 'YYYY-MM-DD hh:mm A')
     }
   },
   data: () => ({

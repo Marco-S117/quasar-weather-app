@@ -1,5 +1,5 @@
 <template>
-  <q-footer :reveal="$q.screen.xs">
+  <q-footer>
     <q-tabs>
       <q-route-tab
         v-for="route in tabRoutes"

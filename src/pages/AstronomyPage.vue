@@ -1,6 +1,6 @@
 <template>
   <q-page v-if="!!astronomy" padding>
-    <Astronomy :astronomy="astronomy" />
+    <Astronomy :data="astronomy" />
   </q-page>
 </template>
 
