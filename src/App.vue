@@ -1,10 +1,9 @@
 <template>
   <div id="q-app">
     <q-img
-      :placeholder-src="currentThemeImage"
-      :src="currentThemeImage"
+      :placeholder-src="activeTheme.bgImage"
+      :src="activeTheme.bgImage"
       :ratio="16/9"
-      :position="currenteThemeImagePosition"
       no-default-spinner
       img-class="filter"
       class="fixed-full bg-image"
@@ -21,8 +20,7 @@
 </template>
 
 <script>
-import { colors } from 'quasar'
-const { setBrand } = colors
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -30,54 +28,16 @@ export default {
     this.$q.dark.set(true)
   },
   beforeMount () {
-    this.$root.$on('onThemeChange', this.changeTheme)
     this.$root.$on('onPlaceSearch', this.onLocationSearch)
-  },
-  beforeDestroy () {
-    this.$root.$off('onPlaceSearch')
   },
   mounted () {
     this.checkAccessDevicePosition()
   },
   data: () => ({
-    themesData: {
-      sky: {
-        primary: '#1C72B5',
-        secondary: '#7ca5c4',
-        dark: '#0D1A24',
-        info: '#7dc9e0',
-        bgImagePositionDesktop: 'left',
-        bgImagePositionMobile: '50%'
-      },
-      moon: {
-        primary: '#C04D68',
-        secondary: '#c28392',
-        dark: '#382037',
-        info: '#907894',
-        bgImagePositionDesktop: '50%',
-        bgImagePositionMobile: '50%'
-      },
-      nature: {
-        primary: '#7ABA8B',
-        secondary: '#608B84',
-        dark: '#0F292B',
-        info: '#BADB94',
-        bgImagePositionDesktop: 'right',
-        bgImagePositionMobile: '65%'
-      }
-    },
-    activeTheme: 'sky',
     position: null
   }),
   computed: {
-    currentThemeImage () {
-      return require(`assets/images/bg-${this.activeTheme}.jpg`)
-    },
-    currenteThemeImagePosition () {
-      return this.$q.screen.xs || this.$q.screen.sm
-        ? this.themesData[this,this.activeTheme].bgImagePositionMobile
-        : this.themesData[this,this.activeTheme].bgImagePositionDesktop
-    }
+    ...mapGetters('theme', ['activeTheme'])
   },
   methods: {
     checkAccessDevicePosition () {
@@ -116,13 +76,6 @@ export default {
       if (!!place) {
         this.getCurrentLocationName(null, null, place)
       }
-    },
-    changeTheme (theme) {
-      this.activeTheme = theme
-      setBrand('primary', this.themesData[this.activeTheme].primary)
-      setBrand('secondary', this.themesData[this.activeTheme].secondary)
-      setBrand('dark', this.themesData[this.activeTheme].dark)
-      setBrand('info', this.themesData[this.activeTheme].info)
     }
   }
 }
