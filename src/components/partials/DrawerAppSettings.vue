@@ -35,7 +35,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import {  } from 'vuex'
 
 export default {
   name: 'DrawerAppSettings',
