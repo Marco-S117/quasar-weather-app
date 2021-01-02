@@ -19,19 +19,12 @@
           <div class="text-subtitle1 text-info">
             {{ weather.current.condition.text }}
           </div>
-          <div class="text-grey q-mt-md">
-            <q-icon
-              @click="refreshCurrentWeather"
-              :class="{ 'rotating': isRefreshing }"
-              name="refresh"
-              size="22px"
-              class="pointer q-mr-xs"
-            />
-            <span class="text-caption">
-              Last update: {{ weather.current.last_updated_epoch | formatDate }}
-            </span>
-          </div>
         </div>
+      </div>
+      <div class="text-grey text-center q-mt-md">
+        <span class="text-caption">
+          Last update: {{ weather.current.last_updated_epoch | formatDate }}
+        </span>
       </div>
     </div>
     <div class="col-12 col-md-4 offset-md-1">
@@ -120,16 +113,7 @@ export default {
     HumiditySvg,
     WindSvg,
     isRefreshing: false
-  }),
-  methods: {
-    refreshCurrentWeather () {
-      this.$emit('onRefreshCurrentWeatherConditions')
-      this.isRefreshing = true
-      setTimeout(() => {
-        this.isRefreshing = false
-      }, 1000)
-    }
-  }
+  })
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="q-px-sm">
     <div class="text-h5 text-center text-uppercase text-grey q-mb-lg">
       {{ day.date_epoch | dayName }}
     </div>

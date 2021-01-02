@@ -27,12 +27,6 @@ const routes = [
         path: '/astronomy',
         icon: 'nights_stay',
         component: () => import('pages/AstronomyPage.vue')
-      },
-      {
-        name: 'Sports',
-        path: '/events',
-        icon: 'event_note',
-        component: () => import('pages/EventsPage.vue')
       }
     ]
   },

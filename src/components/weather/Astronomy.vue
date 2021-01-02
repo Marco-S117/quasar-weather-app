@@ -1,7 +1,15 @@
 <template>
   <div class="astronomy-weather-container row items-center">
     <div class="col-12 col-md-4 offset-md-1">
-      <div class="flex items-center justify-center text-center no-wrap">
+      <div class="flex items-center justify-center no-wrap">
+        <q-img
+          :src="MoonSvg"
+          :style="{ filter: `brightness(${data.astronomy.astro.moon_illumination}%)` }"
+          width="85px"
+          height="85px"
+          no-default-spinner
+          class="q-mr-md"
+        />
         <div>
           <div class="text-caption text-secondary">
             {{ data.location.region }}, {{ data.location.country }}
@@ -16,14 +24,7 @@
       </div>
     </div>
     <div class="col-12 col-md-4 offset-md-1">
-      <div class="text-h6 text-center text-uppercase text-info">
-        <q-img
-          :src="MoonSvg"
-          :style="{ filter: `brightness(${data.astronomy.astro.moon_illumination}%)` }"
-          width="50px"
-          height="50px"
-          no-default-spinner
-        />
+      <div class="text-h6 text-center text-uppercase q-mb-md">
         {{ data.astronomy.astro.moon_phase }} - {{ data.astronomy.astro.moon_illumination }}%
       </div>
       <div class="flex items-center justify-around text-center q-py-lg">
@@ -77,7 +78,10 @@ export default {
   },
   data: () => ({
     MoonSvg
-  })
+  }),
+  mounted () {
+    console.log(this.data);
+  }
 }
 </script>
 
