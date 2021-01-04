@@ -1,1 +1,18 @@
-// app global css in SCSS form
+/* GLOBAL APP CSS */
+
+/*
+  lIGHTHOUSE APP PERFORMANCE
+    - First Contentful Paint: https://web.dev/font-display/
+*/
+
+@font-face {
+  font-family: SEN;
+  src: url(../assets/fonts/sen/Sen-Regular.woff) format(woff);
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+body {
+  font-family: SEN;
+}
