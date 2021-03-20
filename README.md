@@ -25,8 +25,7 @@ icongenie generate [options]
 
 
 #### Test the app
-[SPA](https://marco-s117.github.io/quasar-weather-app/dist/spa)
-[PWA](https://marco-s117.github.io/quasar-weather-app/dist/pwa)
+[PWA](https://mp-weather-app.netlify.app/)
 
 #### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
