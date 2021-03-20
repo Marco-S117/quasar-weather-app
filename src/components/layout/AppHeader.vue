@@ -81,7 +81,7 @@ export default {
     searchLocation (location) {
       this.isLoadingSuggestedLocations = true
       const AXIOS_PARAMS = {
-        key: '45129826589045a4a67172834201512',
+        key: '01c5ea77ae7a4f92957115655212003',
         q: location
       }
       this.$axios
